@@ -27,7 +27,7 @@ public class velEscaldGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		//batch.draw(img, 0, 0);
-		font.draw(batch, "heeloworlds mother jkuter", 200, 200);
+		font.draw(batch, "HI am Red Your amazind day eeloworlds mother jkuter", 50, 200);
 		batch.end();
 
 
