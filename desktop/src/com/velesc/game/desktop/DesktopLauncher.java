@@ -7,6 +7,10 @@ import com.velesc.game.velEscaldGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+		config.title = "Hello-World";
+		config.useGL30 = false;
+		config.width = 480;
+		config.height = 320;
 		new LwjglApplication(new velEscaldGame(), config);
 	}
 }
