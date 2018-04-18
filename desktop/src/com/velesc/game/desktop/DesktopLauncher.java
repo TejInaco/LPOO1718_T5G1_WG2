@@ -2,7 +2,7 @@ package com.velesc.game.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.velesc.game.velEscaldGame;
+import com.velesc.game.VelocidadeEscaldante;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -11,6 +11,6 @@ public class DesktopLauncher {
 		config.useGL30 = false;
 		config.width = 480;
 		config.height = 320;
-		new LwjglApplication(new velEscaldGame(), config);
+		new LwjglApplication(new VelocidadeEscaldante(), config);
 	}
 }
