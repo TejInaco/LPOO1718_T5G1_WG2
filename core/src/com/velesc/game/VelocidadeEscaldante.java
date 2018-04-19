@@ -23,8 +23,8 @@ import com.velesc.game.Screens.EcraJogo;
  * */
 public class VelocidadeEscaldante extends Game {
 
-    public static final int alturaVirtual = 400;
-    public static final int larguraVirtual = 208;
+    public static final int alturaVirtual = 320;
+    public static final int larguraVirtual = 480;
     /**
      * images in textures*/
     public SpriteBatch batch;

@@ -1,24 +1,70 @@
 package com.velesc.game.Scenes;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.velesc.game.VelocidadeEscaldante;
 
 public class EcraVizualizado {
-    /**
+
     public Stage stage;
     private Viewport viewport;
 
     private Integer worldTimer;
-    private float contador;
-    private Integer pontucao;
+    private float timecount;
+    private Integer score;
 
     Label countdownLabel;
-    Label pontuacaoLabel;
-    Label contadorLabel;
-    Label nivelLabel;
-    Label mundoLabel;
-    Label mustangLabel;
+    Label scoreLabel;
+    Label timeLabel;
+    Label levelLabel;
+    Label worldLabel;
+    Label carLabel;
 
-     3:36m part4;
-*/
+    public EcraVizualizado(SpriteBatch sb){
+        worldTimer = 300;
+        timecount = 0;
+        score = 0;
+
+        viewport = new FitViewport(VelocidadeEscaldante.larguraVirtual,VelocidadeEscaldante.alturaVirtual, new OrthographicCamera());
+
+        stage = new Stage(viewport, sb);
+        /**table to organized labels in certain positions*/
+        Table table = new Table();
+        /**Alinhamento*/
+        table.top();
+        table.setFillParent(true);
+
+        /**Representativa do nosso Integer*/
+        /**%03d how many numbers will show */
+        countdownLabel = new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        scoreLabel = new Label(String.format("%06d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        timeLabel = new Label("Time",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label("1",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        worldLabel = new Label("World",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        carLabel = new Label("VeloEs",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+        table.add(carLabel).expandX().padTop(10);
+        //expandX pos as labels todas no angulo do x. ve a quantidade de labels e dividias pela distancia
+        table.add(worldLabel).expandX().padTop(10);
+        table.add(timeLabel).expandX().padTop(10);
+        table.row();
+        table.add(scoreLabel).expandX();
+        table.add(levelLabel).expandX();
+        table.add(countdownLabel).expandX();
+
+        stage.addActor(table);
+
+
+
+    }
+
+
+
 }
