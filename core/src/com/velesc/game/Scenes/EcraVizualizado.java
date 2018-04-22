@@ -51,6 +51,7 @@ public class EcraVizualizado {
         carLabel = new Label("VeloEs",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
         table.add(carLabel).expandX().padTop(10);
+        //TODO Pensar em mudar par
         //expandX pos as labels todas no angulo do x. ve a quantidade de labels e dividias pela distancia
         table.add(worldLabel).expandX().padTop(10);
         table.add(timeLabel).expandX().padTop(10);

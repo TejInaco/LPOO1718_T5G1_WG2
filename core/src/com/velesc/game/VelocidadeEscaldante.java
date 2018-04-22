@@ -25,6 +25,9 @@ public class VelocidadeEscaldante extends Game {
 
     public static final int alturaVirtual = 320;
     public static final int larguraVirtual = 480;
+    /**Pixels per meter*/
+    public static final float PPM = 100;
+
     /**
      * images in textures*/
     public SpriteBatch batch;
