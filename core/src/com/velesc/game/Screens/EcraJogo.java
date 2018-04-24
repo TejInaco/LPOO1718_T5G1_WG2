@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.Scenes.EcraVizualizado;
+import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
 import com.velesc.game.Sprites.CarroControlado;
 
@@ -76,66 +77,15 @@ public class EcraJogo implements Screen {
         /***world class manages all physics entities, dynamic simulation, and asynchronous queries. The world
          also contains efficient memory management facilities */
         world = new World(new Vector2(0,-10),true);
+
+        //allows the debug lines fo our  box2d world
         b2dr = new Box2DDebugRenderer();
 
+        new B2WorldCreator( world, map );
+
+        //Creates car in our world
         player = new CarroControlado(world);
 
-        //TODO to move later on to the logic classes of with object
-        BodyDef bdef = new BodyDef();
-        PolygonShape shape = new PolygonShape();
-        FixtureDef fdef = new FixtureDef();
-        Body body;
-        //TODO map.getLayers().get(2) the index started from the bottow check pat7 5:53
-        /** Ground */
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(  (rect.getX() +rect.getWidth()/2)/ VelocidadeEscaldante.PPM, (rect.getY() + rect.getHeight() /2)/VelocidadeEscaldante.PPM);
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-
-        /**create pipe bodies/fixtures TODO serao os nossos blocos e carros parados || Only needs to change
-         * de index of it*/
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set( (rect.getX() +rect.getWidth()/2) /VelocidadeEscaldante.PPM, (rect.getY() + rect.getHeight() /2)/VelocidadeEscaldante.PPM);
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-        /**For the briks TODO change the index, mostly liked we will not needed it*/
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(  (rect.getX() +rect.getWidth()/2)/VelocidadeEscaldante.PPM, (rect.getY() + rect.getHeight() /2)/VelocidadeEscaldante.PPM);
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
-        /**FOr the coin bodies TODO check if we will need it*/
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
-            Rectangle rect = ((RectangleMapObject) object).getRectangle();
-
-            bdef.type = BodyDef.BodyType.StaticBody;
-            bdef.position.set(  (rect.getX() +rect.getWidth()/2)/VelocidadeEscaldante.PPM, (rect.getY() + rect.getHeight() /2)/VelocidadeEscaldante.PPM);
-            body = world.createBody(bdef);
-
-            shape.setAsBox(rect.getWidth()/2, rect.getHeight()/2);
-            fdef.shape = shape;
-            body.createFixture(fdef);
-        }
     }
 
     @Override
@@ -233,6 +183,10 @@ public class EcraJogo implements Screen {
 
     @Override
     public void dispose() {
-
+         map.dispose();
+         renderer.dispose();
+         world.dispose();
+         b2dr.dispose();
+         hud.dispose();
     }
 }

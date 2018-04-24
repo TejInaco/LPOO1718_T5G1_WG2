@@ -7,19 +7,23 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.VelocidadeEscaldante;
 
-public class EcraVizualizado {
+public class EcraVizualizado  implements Disposable{
 
+    //Scene2d.ui Stage and its own viewport for HUD
     public Stage stage;
     private Viewport viewport;
 
+    //Time and score for the car Tracking variables
     private Integer worldTimer;
     private float timecount;
     private Integer score;
 
+    //Scene 2d widgets
     Label countdownLabel;
     Label scoreLabel;
     Label timeLabel;
@@ -27,7 +31,8 @@ public class EcraVizualizado {
     Label worldLabel;
     Label carLabel;
 
-    public EcraVizualizado(SpriteBatch sb){
+    public EcraVizualizado(SpriteBatch sb) {
+
         worldTimer = 300;
         timecount = 0;
         score = 0;
@@ -67,5 +72,9 @@ public class EcraVizualizado {
     }
 
 
+    @Override
+    public void dispose() {
+        stage.dispose();
 
+    }
 }
