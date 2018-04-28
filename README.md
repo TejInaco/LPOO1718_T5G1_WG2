@@ -2,18 +2,18 @@ git for the second work project
 
 ## Architecture Design
 
-  ### Package and cl
+  #### Package and UML
   
-  ### Design of behavioural aspects (Maquina de Estados)
+  #### Design of behavioural aspects (Maquina de Estados)
 
-  ### Expected Design Patterns 
+  #### Expected Design Patterns 
 
 ## GUI Design
 
-   ## Main functionalities
+   ### Main functionalities
 
-   ## GUI mock-ups
+   ### GUI mock-ups
    
 ## Test Design
-  ## Test cases
+  ### Test cases
   
