@@ -67,7 +67,7 @@ public class EcraJogo implements Screen {
         /**Load our map and setup our map renderer*/
         maploader = new TmxMapLoader();
         /**TODO Aqui vai a textura do nivel 1 na string do maploader*/
-        map = maploader.load("Level1.tmx");
+        map = maploader.load("roadv1.tmx");
         renderer = new OrthogonalTiledMapRenderer(map, 1/VelocidadeEscaldante.PPM);
 
         /**TODO certificar se a camera esta no sitio correcto*/
@@ -76,7 +76,7 @@ public class EcraJogo implements Screen {
 
         /***world class manages all physics entities, dynamic simulation, and asynchronous queries. The world
          also contains efficient memory management facilities */
-        world = new World(new Vector2(0,-10),true);
+        world = new World(new Vector2(0,0),true);
 
         //allows the debug lines fo our  box2d world
         b2dr = new Box2DDebugRenderer();
@@ -93,23 +93,29 @@ public class EcraJogo implements Screen {
 
     }
     public void handleInput(float dt){
-        //TODO for test purposes only to check the map texture . 2 lines blow
-/*
+/*    //TODO for test purposes only to check the map texture . 2 lines blow
+        //no much diference in the movement of the camera position
         if(Gdx.input.isTouched() )
             gameCamera.position.x += 100 * dt;
 */
         //TODO end of the tests
-        //Actuall controls of the car
+        //Actual controls of the car
         //TODO thing about adding && player.b2.body.getLinear Velocity().y <= 2
-        //TODO Test the changes in the keys pressed, the deslocations on x and y
+        //behaviour acting a bit of weird with the direction change :(
         //may be needed some negative configurations on the vector2
-        if(Gdx.input.isKeyPressed(Input.Keys.UP))
-            player.b2body.applyLinearImpulse(new Vector2(0,4f), player.b2body.getWorldCenter(),true );
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT))
-            player.b2body.applyLinearImpulse(new Vector2(0.1f,0), player.b2body.getWorldCenter(),true);
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT))
-            player.b2body.applyLinearImpulse(new Vector2(0.1f,0), player.b2body.getWorldCenter(),true);
+        Vector2 vel = this.player.b2body.getLinearVelocity();
+        Vector2 pos = this.player.b2body.getPosition();
+        //TODO Retirar esta macro
+        float MAX_VELOCITY = 100;
 
+        if(Gdx.input.isKeyPressed(Input.Keys.UP) && vel.x < MAX_VELOCITY ) //player.b2body.getWorldCenter()
+            player.b2body.applyLinearImpulse( 0,80f, pos.x, pos.y,true );
+        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+            player.b2body.applyLinearImpulse(1000f,0 , pos.x, pos.y,true);
+        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
+            player.b2body.applyLinearImpulse(-1000f,0,pos.x, pos.y,true);
+    //Old movement equation        //new Vector2(-6000f,0), player.b2body.getWorldCenter(),true and
+        // used isKeyJustPressed
     }
     /**
      * @param dt recives a float delta time
@@ -124,7 +130,6 @@ public class EcraJogo implements Screen {
          @param positionIterations - for the position constraint solver.*/
         world.step(1/60f,6,2);
         /**tracking the car with game camera*/
-        //TODO already change the code to corresponde the camera and the car in the yy axes - TEST
         gameCamera.position.y = player.b2body.getPosition().y;
         /**update our gamecam with correct coordinates after changes*/
         gameCamera.update();
@@ -136,10 +141,8 @@ public class EcraJogo implements Screen {
     public void render(float delta) {
         /**separate our update logic from render*/
         update(delta);
-
         /**Clear the game screen with Black*/
-        /**TODO change the color of it*/
-        Gdx.gl.glClearColor(1,0,0,1);
+        Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
     /** to render what camera can see*/
@@ -153,9 +156,10 @@ public class EcraJogo implements Screen {
         renderer.render();
 
         //TODO do  run to check if there is a green line around the objects
+        //there is a green line but not sure if actual is the map correct
+
         /**Renderer our BOX2dDebugLines*/
         b2dr.render(world, gameCamera.combined);
-
         /**Set our batch to now draw what HUD camera sees*/
         game.batch.setProjectionMatrix(hud.stage.getCamera().combined);
         hud.stage.draw();

@@ -23,10 +23,10 @@ import com.velesc.game.Screens.EcraJogo;
  * */
 public class VelocidadeEscaldante extends Game {
 
-    public static final int alturaVirtual = 320;
-    public static final int larguraVirtual = 480;
+    public static final int alturaVirtual = 620;
+    public static final int larguraVirtual = 880;
     /**Pixels per meter*/
-    public static final float PPM = 100;
+    public static final float PPM = 16;
 
     /**
      * images in textures*/
