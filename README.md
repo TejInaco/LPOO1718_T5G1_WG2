@@ -16,7 +16,7 @@ O jogo será em 2D com top view.
   #### Design of behavioural aspects (Maquina de Estados)
 //Maquinas de estados
 
-»os desenhos das maquinas de estado
+  ![State Machine](stateMachine.png)
 
   #### Expected Design Patterns 
 Esperamos implentar o MVC com a seguinte estruturação:
