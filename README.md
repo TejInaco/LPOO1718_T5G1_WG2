@@ -27,9 +27,9 @@ Esperamos implentar o MVC com a seguinte estruturação:
 
    ### Main functionalities
    
-   Haverá um interface com o menu inicial onde se pode iniciar o jogo, ver scores e escolher os níveis de dificuldade.
-   O controlo do carro é definido com as teclas, UP, DOWN, LEFT e RIGHT para o controlo de velocidade e de direcções     respectivamente.
-
+   Haverá um interface com o menu inicial onde se pode iniciar o jogo, ver scores, e escolher o modo de jogo.
+   O controlo do carro é definido com as teclas, UP, DOWN, LEFT e RIGHT para o controlo de velocidade e de direcções     respectivamente. No Android este controlo é efectuado através do giroscópio que detectará as inclinações do dispositivo.
+ 
   ### GUI mock-ups
   
   Foi utlizado o sofware Tiled para gerar o mapa do jogo e os objectos estáticos dentro do mapa.
