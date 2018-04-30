@@ -5,12 +5,12 @@ O jogo será em 2D com top view.
 ## Architecture Design
 
   #### Package and UML
-  
+    
   O projecto utilizará a framework libGDX com foco no desenvolvimento em AndroidSDK e em Desktop.Utilizirá o package Physics
   Utilizou-se o diagram UML proposto pelo Prof André Restivo, onde se pretende acrescentar as classes especificas do jogo.
   
-  // ![converageJunit](converageJunit.png)
- »diagram do uml ... Inserir as imagens no repositorio 
+  ![UML](UMLvelesc.png)
+ 
   
   
   #### Design of behavioural aspects (Maquina de Estados)
@@ -41,4 +41,27 @@ Esperamos implentar o MVC com a seguinte estruturação:
   1)inclinação do ecrã para a direita, o carro vira para a direita
   2)inclinação do ecrã para a esquerda, o carro vira para a esquerda
   3) Teste dos inputs das teclas para modificação da velocidade e direcção do carro
-  
+  4) Se colisao com outro veiculo tira pontos
+  5) Se colisao entre player 1 e player 2 nao tira pontos mas tem efeitos fisicos
+  6) Se frente/trás altera velocidade como deve
+  7) Se atropelar diminui vidas.
+  8) Se atingir caes ou gator diminui pontos
+  9) Se bonus de vidas/pontos produz o efeito desejado
+  10) Se colisao acusa
+  11) Se escolha no menu altera para menu certo
+Se escolho modo muda o modo
+Se lombas com excesso diminyi velocidade e pontos e vibra no Android
+Se multiplayer preenche ambas estruturas e cada im no certo
+Se nao vira com pisca mas vira com pisca e so para esse lado
+Se passadeiras, peoes e animais aleatorios na aparicao
+Se pisca .muda sprite
+Se pontos maiores que guardados sao guardados e so esses
+Se por um morrer o outro nao acaba
+Se v nao desce abaido de zero e s quando zero => parado e nao vira
+Se v nao ultrapassa limite na macro
+Se veiculos aleatorios
+Se vidas = 0 => gameover
+Se vira direita e esqurrda mas sem ultrapassar lites nem passar obstaculoa
+Se vira so com pisca
+Se muda estado para o estado correcto com eventos de mudança de estado
+Se inputs espoletam os eventos desejados
