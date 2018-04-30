@@ -21,7 +21,7 @@ O jogo será em 2D com top view.
   #### Expected Design Patterns 
 Esperamos implentar o MVC com a seguinte estruturação:
 
-»por aqui a imagem do controller, mdel, view
+ [MVC](mvc.png)
 
 ## GUI Design
 
