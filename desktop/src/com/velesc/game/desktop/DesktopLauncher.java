@@ -7,10 +7,10 @@ import com.velesc.game.VelocidadeEscaldante;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-//		config.title = "Hello-World";
-//		config.useGL30 = false;
-//		config.width = 480;
-//		config.height = 320;
+		config.title = "Velocidade Escaldante";
+		config.useGL30 = false;
+		config.width = VelocidadeEscaldante.largura;
+		config.height = VelocidadeEscaldante.altura;
 		new LwjglApplication(new VelocidadeEscaldante());
 	}
 }

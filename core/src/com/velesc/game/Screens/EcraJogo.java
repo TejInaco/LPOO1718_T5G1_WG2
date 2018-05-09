@@ -5,18 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.Scenes.EcraVizualizado;
 import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
@@ -52,13 +46,13 @@ public class EcraJogo implements Screen {
         this.game = game;
 
         //adicionar textura jpg TODO
-        //texture = new Texture(Gdx.files.internal("resources/estradaTeste.jpg"));
+    //    texture = new Texture(Gdx.files.internal("Assets/estradaTeste.jpg"));
         //"resources/estradaTeste.jpg"
 
         /**Create cam used to follow the car through cam world*/
         gameCamera = new OrthographicCamera();
         /**Create FitViewPort to maintain virtual aspect ratio despite screen*/
-        gamePort = new FitViewport(VelocidadeEscaldante.larguraVirtual/VelocidadeEscaldante.PPM, VelocidadeEscaldante.alturaVirtual/VelocidadeEscaldante.PPM, gameCamera);
+        gamePort = new FitViewport(VelocidadeEscaldante.altura /VelocidadeEscaldante.PPM, VelocidadeEscaldante.largura /VelocidadeEscaldante.PPM, gameCamera);
         //Test with */
         //could use the Screenviewport*/
         /**Create our game HUD for scories/timers/level info*/
@@ -67,7 +61,7 @@ public class EcraJogo implements Screen {
         /**Load our map and setup our map renderer*/
         maploader = new TmxMapLoader();
         /**TODO Aqui vai a textura do nivel 1 na string do maploader*/
-        map = maploader.load("roadv1.tmx");
+        //map = maploader.load(   Gdx.files.internal("Assets/roadv1.tmx") );
         renderer = new OrthogonalTiledMapRenderer(map, 1/VelocidadeEscaldante.PPM);
 
         /**TODO certificar se a camera esta no sitio correcto*/

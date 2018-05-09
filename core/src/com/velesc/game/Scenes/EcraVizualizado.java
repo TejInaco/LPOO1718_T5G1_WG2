@@ -37,7 +37,7 @@ public class EcraVizualizado  implements Disposable{
         timecount = 0;
         score = 0;
 
-        viewport = new FitViewport(VelocidadeEscaldante.larguraVirtual,VelocidadeEscaldante.alturaVirtual, new OrthographicCamera());
+        viewport = new FitViewport(VelocidadeEscaldante.altura,VelocidadeEscaldante.largura, new OrthographicCamera());
 
         stage = new Stage(viewport, sb);
         /**table to organized labels in certain positions*/

@@ -1,5 +1,6 @@
 package com.velesc.game;
-
+import com.velesc.game.MainMenuScreen;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -23,28 +24,39 @@ import com.velesc.game.Screens.EcraJogo;
  * */
 public class VelocidadeEscaldante extends Game {
 
-    public static final int alturaVirtual = 620;
-    public static final int larguraVirtual = 880;
-    /**Pixels per meter*/
+    public static final int largura = 480;
+    public static final int altura = 720;
+    //Pixels per meter
     public static final float PPM = 16;
 
-    /**
-     * images in textures*/
+    public static boolean IS_MOBILE = false;
+    //images in textures
     public SpriteBatch batch;
-
+    public BitmapFont font;
 
 
     @Override
 	public void create () {
         batch = new SpriteBatch();
-        /**the game itslef*/
-        setScreen(new EcraJogo(this));
+        //the game itself
+        font = new BitmapFont();
+
+
+        if(Gdx.app.getType() == Application.ApplicationType.Android ) {
+            IS_MOBILE = true;
+        }
+        this.setScreen(new MainMenuScreen(this));
     }
 
-    /**delegates to the playsecreen*/
+    //delegates to the play screen
 	@Override
 	public void render(){
 		super.render();
 	}
+	@Override
+    public void dispose(){
+        batch.dispose();
+        font.dispose();
+    }
 
 }
