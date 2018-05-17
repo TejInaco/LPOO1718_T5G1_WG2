@@ -64,9 +64,7 @@ public class MainMenuChoice implements Screen {
         camera.update();
 
         game.batch.begin();
-        //top
         game.batch.draw(texture_top,0,400 );
-        //button
         game.batch.draw(texture_buttom,1,1 );
         game.batch.end();
 

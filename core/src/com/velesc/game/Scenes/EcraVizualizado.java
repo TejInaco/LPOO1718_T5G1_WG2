@@ -12,6 +12,10 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.VelocidadeEscaldante;
 
+/**
+ *  Classe para a vizualizacao do contador, do nivel e do tempo no ecra de jogo
+ *
+ * */
 public class EcraVizualizado  implements Disposable{
 
     //Scene2d.ui Stage and its own viewport for HUD
@@ -37,7 +41,7 @@ public class EcraVizualizado  implements Disposable{
         timecount = 0;
         score = 0;
 
-        viewport = new FitViewport(VelocidadeEscaldante.altura,VelocidadeEscaldante.largura, new OrthographicCamera());
+        viewport = new FitViewport(VelocidadeEscaldante.largura,VelocidadeEscaldante.altura, new OrthographicCamera());
 
         stage = new Stage(viewport, sb);
         /**table to organized labels in certain positions*/

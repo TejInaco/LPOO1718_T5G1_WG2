@@ -1,4 +1,4 @@
-package com.velesc.game;
+package com.velesc.game.testes;
 
 public class testCar {
 }

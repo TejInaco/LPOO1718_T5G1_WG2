@@ -1,14 +1,7 @@
 package com.velesc.game.Tools;
 
-import com.badlogic.gdx.maps.MapLayer;
-import com.badlogic.gdx.maps.MapObject;
-import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import com.velesc.game.Sprites.Bloco;
-import com.velesc.game.Sprites.CarroSecundario;
-import com.velesc.game.VelocidadeEscaldante;
 
 public class B2WorldCreator   {
     public B2WorldCreator(World world, TiledMap map){
@@ -20,7 +13,8 @@ public class B2WorldCreator   {
 
 
         //Esta a definir o objecto RoadLimits onde se houver colisao existe um crash
-        for(MapObject object : map.getLayers().get(2).getObjects().getByType(RectangleMapObject.class)){
+        /*
+        for(MapObject object : map.getLayers().get(0).getObjects().getByType(RectangleMapObject.class)){
             Rectangle rect = ((RectangleMapObject) object).getRectangle();
 
             bdef.type = BodyDef.BodyType.StaticBody;
@@ -31,6 +25,7 @@ public class B2WorldCreator   {
             fdef.shape = shape;
             body.createFixture(fdef);
         }
+    */
         //MapLayer layer = map.getLayers().get("RoadLimits");
 
 /*

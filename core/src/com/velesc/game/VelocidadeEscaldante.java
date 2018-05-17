@@ -24,8 +24,8 @@ import com.velesc.game.Screens.EcraJogo;
  * */
 public class VelocidadeEscaldante extends Game {
 
-    public static final int largura = 480;
-    public static final int altura = 720;
+    public static final int largura = 640;
+    public static final int altura = 1024;
     //Pixels per meter
     public static final float PPM = 16;
 
@@ -45,7 +45,8 @@ public class VelocidadeEscaldante extends Game {
         if(Gdx.app.getType() == Application.ApplicationType.Android ) {
             IS_MOBILE = true;
         }
-        this.setScreen(new MainMenuScreen(this));
+        //MainMenuScreen
+        this.setScreen(new EcraJogo(this));
     }
 
     //delegates to the play screen
