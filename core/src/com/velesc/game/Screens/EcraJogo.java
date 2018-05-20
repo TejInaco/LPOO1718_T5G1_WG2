@@ -7,14 +7,14 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.velesc.game.InputHandler.InputHandlerAndroid;
+import com.velesc.game.InputHandler.InputHandlerDesktop;
 import com.velesc.game.Scenes.EcraVizualizado;
 import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
@@ -41,7 +41,7 @@ public class EcraJogo implements Screen {
     /**NOT IN USE YET*/
     //Texture texture;
     /***/
-    private  CarroControlado player;
+    public  CarroControlado player;
 
 
 
@@ -100,30 +100,20 @@ public class EcraJogo implements Screen {
     public void show() {
 
     }
-    public void handleInput(float dt){
-/*    //TODO for test purposes only to check the map texture . 2 lines blow
-        //no much diference in the movement of the camera position
-        if(Gdx.input.isTouched() )
-            gameCamera.position.x += 100 * dt;
-*/
-        //TODO end of the tests
-        //Actual controls of the car
-        //TODO thing about adding && player.b2.body.getLinear Velocity().y <= 2
-        //behaviour acting a bit of weird with the direction change :(
-        //may be needed some negative configurations on the vector2
-        Vector2 vel = this.player.b2body.getLinearVelocity();
-        Vector2 pos = this.player.b2body.getPosition();
-        //TODO Retirar esta macro
-        float MAX_VELOCITY = 100;
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && vel.x < MAX_VELOCITY ) //player.b2body.getWorldCenter()
-            player.b2body.applyLinearImpulse( 0,80f, pos.x, pos.y,true );
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            player.b2body.applyLinearImpulse(1000f,0 , pos.x, pos.y,true);
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            player.b2body.applyLinearImpulse(-1000f,0,pos.x, pos.y,true);
-    //Old movement equation        //new Vector2(-6000f,0), player.b2body.getWorldCenter(),true and
-        // used isKeyJustPressed
+    /**
+     * Fuction to separate from the input from desktop and the input from android
+     * @param dt recives a float delta time
+     * */
+    public void handleInput(float dt){
+
+        if(game.IS_MOBILE == true){
+            InputHandlerAndroid inputandroid = new InputHandlerAndroid( player, dt);
+        }else{
+            InputHandlerDesktop inputdesktop;
+            inputdesktop = new InputHandlerDesktop(player,dt);
+        }
+
     }
     /**
      * @param dt recives a float delta time

@@ -12,6 +12,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.velesc.game.Screens.EcraJogo;
 
 /**
+ * Class to define the general definitions of the game
+ * Invokes Menu
+ *
  * NOTE:
  * Our class #velEscaldGamge#  belongs to CLASS game [contain methods set and get screen].
  * This last one implements the <Interface>
@@ -24,10 +27,10 @@ import com.velesc.game.Screens.EcraJogo;
  * */
 public class VelocidadeEscaldante extends Game {
 
-    public static final int largura = 640;
-    public static final int altura = 1024;
-    //Pixels per meter
-    public static final float PPM = 16;
+    public static final int largura = 512;
+    public static final int altura = 720;
+
+    public static final float PPM = 16; //Pixels per meter
 
     public static boolean IS_MOBILE = false;
     //images in textures
@@ -52,7 +55,8 @@ public class VelocidadeEscaldante extends Game {
     //delegates to the play screen
 	@Override
 	public void render(){
-		super.render();
+
+        super.render();
 	}
 	@Override
     public void dispose(){

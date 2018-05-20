@@ -13,7 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.VelocidadeEscaldante;
 
 /**
- *  Classe para a vizualizacao do contador, do nivel e do tempo no ecra de jogo
+ *  Class responsible for visualization of the time, score, and level on the game
  *
  * */
 public class EcraVizualizado  implements Disposable{
@@ -70,9 +70,6 @@ public class EcraVizualizado  implements Disposable{
         table.add(countdownLabel).expandX();
 
         stage.addActor(table);
-
-
-
     }
 
 
