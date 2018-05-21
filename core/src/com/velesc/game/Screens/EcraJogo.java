@@ -1,7 +1,6 @@
 package com.velesc.game.Screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -15,7 +14,6 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.velesc.game.InputHandler.InputHandlerAndroid;
 import com.velesc.game.InputHandler.InputHandlerDesktop;
-import com.velesc.game.Scenes.EcraVizualizado;
 import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
 import com.velesc.game.Sprites.CarroControlado;
@@ -109,6 +107,7 @@ public class EcraJogo implements Screen {
 
         if(game.IS_MOBILE == true){
             InputHandlerAndroid inputandroid = new InputHandlerAndroid( player, dt);
+            inputandroid.inputmanager();
         }else{
             InputHandlerDesktop inputdesktop;
             inputdesktop = new InputHandlerDesktop(player,dt);

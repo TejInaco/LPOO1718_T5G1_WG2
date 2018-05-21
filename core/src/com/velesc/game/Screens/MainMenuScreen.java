@@ -1,4 +1,4 @@
-package com.velesc.game;
+package com.velesc.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.assets.AssetManager;
@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.velesc.game.Assets;
 import com.velesc.game.Screens.EcraJogo;
 import com.velesc.game.VelocidadeEscaldante;
 import com.badlogic.gdx.Screen;
@@ -28,25 +29,11 @@ public class MainMenuScreen implements Screen {
 
     final VelocidadeEscaldante game;
 
-
     private OrthographicCamera camera;
     private Viewport viewport;
     protected Stage stage;
 
-    private AssetManager assetsManager;
-
-    Texture texture_background;
-    Texture texture_top;
-    Texture texture_buttom;
-
-    Texture texture_play;
-    Texture texture_exit;
-    Texture texture_scores;
-
-    Texture texture_playInactive;
-    Texture texture_exitInactive;
-    Texture texture_scoresInactive;
-
+    Assets assets;
 
     boolean jumpScreen;
 
@@ -58,22 +45,7 @@ public class MainMenuScreen implements Screen {
         camera = new OrthographicCamera();
         viewport = new FitViewport(game.largura,game.altura);
         viewport.apply();
-
-        //assetsManager = new AssetManager();
-
-        texture_background = new Texture(Gdx.files.internal("android/assets/logo.png"));
-        texture_top = new Texture(Gdx.files.internal("android/assets/Velocidade.png"));
-        texture_buttom = new Texture(Gdx.files.internal("android/assets/Escaldante.png"));
-
-        texture_play = new Texture(Gdx.files.internal("android/assets/play.png"));
-        texture_exit = new Texture(Gdx.files.internal("android/assets/exit.png"));
-        texture_scores = new Texture(Gdx.files.internal("android/assets/Highscores.png"));
-
-        texture_playInactive = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
-        texture_exitInactive = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
-        texture_scoresInactive = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
-
-
+        assets = new Assets();
 
         jumpScreen = false;
     }
@@ -95,11 +67,11 @@ public class MainMenuScreen implements Screen {
             //Logo Drawing
             //assetsManager.load(Assets.BACKGROUND)
 
-            game.batch.draw(texture_background,0,50);
+            game.batch.draw(assets.BACKGROUND,0,50);
             //top
-            game.batch.draw(texture_top,0,400 );
+            game.batch.draw(assets.TOP,0,400 );
             //button
-            game.batch.draw(texture_buttom,1,1 );
+            game.batch.draw(assets.BUTTOM ,1,1 );
             game.font.setColor(Color.BLACK);
             game.font.draw(game.batch, "Welcome to Velocidade Escaldante", 200, 200);
             game.font.draw(game.batch, " Press ENTER or Tap anywhere to begin", game.largura/ecra_HalfDivision, 180);
@@ -114,48 +86,49 @@ public class MainMenuScreen implements Screen {
             camera.update();
             game.batch.begin();
             //top
-            game.batch.draw(texture_top,0,400 );
+            game.batch.draw(assets.TOP,0,400 );
             //button
-            game.batch.draw(texture_buttom,1,1 );
+            game.batch.draw(assets.BUTTOM,1,1 );
 
             //poderia por no x Velcoidade.largura/2 && Gdx.input.getY() > 300)
             //|| Gdx.input.isKeyJustPressed(Input.Keys.ENTER)
             if( Gdx.input.getX() > 50 && Gdx.input.getX() < 250 ){ //eixo do xx
                 //Exit Button selection
                 if(Gdx.input.getY() > 180 && Gdx.input.getY() < 280) {
-                    game.batch.draw(texture_exit, 50, 200, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_EXIT, 50, 200, EXIT_BUTTON_WIDTH, EXIT_BUTTON_HEIGHT);
                     if (Gdx.input.isTouched()) {
+                        assets.dispose();
                         Gdx.app.exit();
                     }
-                    game.batch.draw(texture_playInactive, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-                    game.batch.draw(texture_scoresInactive, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_PLAYINACTIVE, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_SCORESINACTIVE, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
                 }
                 //Highscores button selection
                 if(Gdx.input.getY() > 290 && Gdx.input.getY() < 370) {
-                    game.batch.draw(texture_scores,50,100, HIGHSCORES_BUTTON_WIDTH, HIGHSCORES_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_SCORES,50,100, HIGHSCORES_BUTTON_WIDTH, HIGHSCORES_BUTTON_HEIGHT);
                     if (Gdx.input.isTouched()) {
                         //TODO Substituir por o ecran scores
                         Gdx.app.exit();
                     }
-                    game.batch.draw(texture_playInactive, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-                    game.batch.draw(texture_exitInactive, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_PLAYINACTIVE, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_EXITINACTIVE, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
                 }
                 //Play Button selection 250 350
                 if(Gdx.input.getY() > 70 && Gdx.input.getY() < 170) {
-                    game.batch.draw(texture_play, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_PLAY, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
                     if (Gdx.input.isTouched()) {
                         this.dispose();
                         //TODO teste se inicia o jogo
                         game.setScreen(new EcraJogo(game));
                     }
-                    game.batch.draw(texture_exitInactive, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-                    game.batch.draw(texture_scoresInactive, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_EXITINACTIVE, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                    game.batch.draw(assets.TEXTURE_SCORESINACTIVE, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
                 }
 
             }else{
-                game.batch.draw(texture_playInactive, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-                game.batch.draw(texture_exitInactive, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
-                game.batch.draw(texture_scoresInactive, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                game.batch.draw(assets.TEXTURE_PLAYINACTIVE, 50, 300, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                game.batch.draw(assets.TEXTURE_EXITINACTIVE, 50, 200, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
+                game.batch.draw(assets.TEXTURE_SCORESINACTIVE, 50, 100, PLAY_BUTTON_WIDTH, PLAY_BUTTON_HEIGHT);
             }
 
 
@@ -227,9 +200,6 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void dispose(){
-     texture_background.dispose();
-     texture_buttom.dispose();
-     texture_top.dispose();
 
     }
 

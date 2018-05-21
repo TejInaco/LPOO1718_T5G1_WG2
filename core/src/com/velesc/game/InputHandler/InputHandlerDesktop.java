@@ -5,6 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.velesc.game.Sprites.CarroControlado;
 
+
+/**
+ * Class responsible only for the desktop inputs to control the car player
+ * */
 public class InputHandlerDesktop {
     //TODO Retirar esta macro
     float MAX_VELOCITY = 100;

@@ -1,4 +1,4 @@
-package com.velesc.game.Scenes;
+package com.velesc.game.Screens;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;

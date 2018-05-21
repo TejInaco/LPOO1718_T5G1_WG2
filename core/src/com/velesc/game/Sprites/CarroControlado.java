@@ -29,9 +29,9 @@ public class CarroControlado extends ApplicationAdapter{
     public Sprite sprite;
     public World world;
     public Body b2body;
-    public Texture texture;
 
-    private AssetManager assetManager;
+
+    Assets assets = new Assets();
 
     public CarroControlado(World world){
         this.world = world;
@@ -40,14 +40,7 @@ public class CarroControlado extends ApplicationAdapter{
     @Override
     public void create(){
         batch = new SpriteBatch();
-        assetManager = new AssetManager();
-        assetManager.setLoader(Texture.class, new TextureLoader(new InternalFileHandleResolver()));
-        assetManager.load("android/assets/camaro.png", Texture.class);
-        assetManager.finishLoading();
-        texture = assetManager.get("android/assets/camaro.png");
-               // new Texture(Gdx.files.internal("android/assets/camaro.png"));
-
-        sprite = new Sprite(texture);
+        sprite = new Sprite(assets.CAMARO);
 
         //Center the sprite in the top/middle of the screen
         sprite.setPosition(32/ VelocidadeEscaldante.PPM,
@@ -93,7 +86,6 @@ public class CarroControlado extends ApplicationAdapter{
     }
     @Override
     public void dispose(){
-        texture.dispose();
         world.dispose();
     }
 
