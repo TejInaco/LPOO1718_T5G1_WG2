@@ -1,9 +1,10 @@
 package com.velesc.game.Sprites;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
-public class Car {
+public class Car extends Sprite{
     public static final int WIDTH = 30;
     public static final int HEIGHT = 60;
     public static final Vector2 MAXVELOCITY = new Vector2(0, 500);
@@ -39,10 +40,6 @@ public class Car {
         decelerating = false;
     }
 
-    public void steerCar (float deltaTime, float moveCar) {
-        velocity.x = moveCar;
-        update(deltaTime);
-    }
 
     public void stopCar() {
         velocity.set(0, 0);

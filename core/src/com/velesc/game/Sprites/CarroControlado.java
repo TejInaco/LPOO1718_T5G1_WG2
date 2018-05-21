@@ -6,9 +6,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g3d.particles.values.RectangleSpawnShapeValue;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -24,12 +24,15 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
-public class CarroControlado extends ApplicationAdapter{
+public class CarroControlado {
+
+    private OrthographicCamera gameCamera;
+
     public SpriteBatch batch;
     public Sprite sprite;
+
     public World world;
     public Body b2body;
-
 
     Assets assets = new Assets();
 
@@ -37,33 +40,30 @@ public class CarroControlado extends ApplicationAdapter{
         this.world = world;
         create();
     }
-    @Override
+    public float carroPositionY(){
+        return b2body.getPosition().y;
+    }
+
     public void create(){
         batch = new SpriteBatch();
-        sprite = new Sprite(assets.CAMARO);
-
-        //Center the sprite in the top/middle of the screen
-        sprite.setPosition(32/ VelocidadeEscaldante.PPM,
-                32/VelocidadeEscaldante.PPM);
-
+        sprite = new Sprite();
 
         BodyDef bdef = new BodyDef();
-        //Posicao inicial
-
         bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.position.set(sprite.getX(),sprite.getY());
+        bdef.position.set(50,50); //Posicao inicial
+
         //Create a physics world. The vector is passed in is gravity
         //world = new World(new Vector2(0,-98f), true);
         b2body = world.createBody(bdef);
 
         //create a rectangular shape for the car
         PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(1,3);
-
+        polygonShape.setAsBox(2,6);
 
         //set physics atributes
         FixtureDef fdef = new FixtureDef();
         fdef.shape = polygonShape;
+
         //TODO Density 1f ?
         fdef.density = 10f;
         fdef.restitution = 0.5f;
@@ -72,21 +72,16 @@ public class CarroControlado extends ApplicationAdapter{
         b2body.createFixture(fdef);
 
     }
-    @Override
-    public void render(){
+
+
+    public void update(float delta){
         world.step(Gdx.graphics.getDeltaTime(),6,2);
         sprite.setPosition(b2body.getPosition().x, b2body.getPosition().y);
-
-        Gdx.gl.glClearColor(1,1,1,1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         batch.begin();
-        batch.draw(sprite, sprite.getX(),sprite.getY());
+        batch.draw(assets.CAMARO,b2body.getPosition().x,b2body.getPosition().y,50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
         batch.end();
 
-    }
-    @Override
-    public void dispose(){
-        world.dispose();
+
     }
 
 }

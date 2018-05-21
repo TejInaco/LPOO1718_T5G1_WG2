@@ -23,23 +23,22 @@ public class EcraVizualizado  implements Disposable{
     private Viewport viewport;
 
     //Time and score for the car Tracking variables
-    private Integer worldTimer;
-    private float timecount;
-    private Integer score;
+    private Integer tempoContador;
+    private Integer pontos;
+    private Integer velocidadeCarro;
 
     //Scene 2d widgets
-    Label countdownLabel;
-    Label scoreLabel;
-    Label timeLabel;
-    Label levelLabel;
-    Label worldLabel;
-    Label carLabel;
+    Label tempoContadorLabel;
+    Label pontosLabel;
+    Label velocidadeCarroLabel;
+    Label tempoContador_NameLabel;
+    Label pontos_NameLabel;
+    Label velocidadeCarro_NameLabel;
 
     public EcraVizualizado(SpriteBatch sb) {
-
-        worldTimer = 300;
-        timecount = 0;
-        score = 0;
+        tempoContador = 0;
+        pontos = 0;
+        velocidadeCarro = 0;
 
         viewport = new FitViewport(VelocidadeEscaldante.largura,VelocidadeEscaldante.altura, new OrthographicCamera());
 
@@ -52,24 +51,28 @@ public class EcraVizualizado  implements Disposable{
 
         /**Representativa do nosso Integer*/
         /**%03d how many numbers will show */
-        countdownLabel = new Label(String.format("%03d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        scoreLabel = new Label(String.format("%06d",worldTimer),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        timeLabel = new Label("Time",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        levelLabel = new Label("1",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        worldLabel = new Label("World",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
-        carLabel = new Label("VeloEs",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        tempoContadorLabel = new Label(String.format("%03d",tempoContador),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        pontosLabel = new Label(String.format("%06d",pontos),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        velocidadeCarroLabel = new Label(String.format("%03d", velocidadeCarro),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
 
-        table.add(carLabel).expandX().padTop(10);
-        //TODO Pensar em mudar par
-        //expandX pos as labels todas no angulo do x. ve a quantidade de labels e dividias pela distancia
-        table.add(worldLabel).expandX().padTop(10);
-        table.add(timeLabel).expandX().padTop(10);
+        tempoContador_NameLabel = new Label("T E M P O",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        pontos_NameLabel = new Label("P O N T O S",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        velocidadeCarro_NameLabel = new Label("Velocidade",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
+    //Primeira Linha de info do topo
+        table.add(tempoContador_NameLabel).expandX().padTop(10);
+        table.add(pontos_NameLabel).expandX().padTop(10);
+        table.add(velocidadeCarro_NameLabel).expandX().padTop(10);
+    //Segunda Linha de info do topo
         table.row();
-        table.add(scoreLabel).expandX();
-        table.add(levelLabel).expandX();
-        table.add(countdownLabel).expandX();
+        table.add(tempoContadorLabel).expandX();
+        table.add(pontosLabel).expandX();
+        table.add(velocidadeCarroLabel).expandX();
 
         stage.addActor(table);
+    }
+    public void setWorldTimer(Integer value){
+        this.tempoContador  = value;
     }
 
 

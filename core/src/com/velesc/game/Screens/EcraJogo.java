@@ -12,16 +12,19 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.velesc.game.Assets;
 import com.velesc.game.InputHandler.InputHandlerAndroid;
 import com.velesc.game.InputHandler.InputHandlerDesktop;
 import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
 import com.velesc.game.Sprites.CarroControlado;
 
-/**Play Screen*/
+/**
+ * Main action
+ **/
 public class EcraJogo implements Screen {
 
-    private VelocidadeEscaldante game;
+    VelocidadeEscaldante game;
 
     private OrthographicCamera gameCamera;
     private FitViewport gamePort;
@@ -31,17 +34,15 @@ public class EcraJogo implements Screen {
     private TmxMapLoader maploader;
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
+
     private AssetManager assetManager;
     //Box2d Variables
     private World world;
     //Graphical representation of our bodies inside of our box2d
     private Box2DDebugRenderer b2dr;
-    /**NOT IN USE YET*/
-    //Texture texture;
-    /***/
+
     public  CarroControlado player;
-
-
+    Assets assets = new Assets();
 
     /**Constructor*/
     public EcraJogo(VelocidadeEscaldante game){
@@ -50,21 +51,13 @@ public class EcraJogo implements Screen {
         /**Create cam used to follow the car through cam world*/
         gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gameCamera.translate(gameCamera.viewportWidth/2,gameCamera.viewportHeight/2);
-        //Numero of tiles - NO RESULT
-        //gameCamera.setToOrtho(false, 64,64);
-        //TODO camera.position.set(camera.viewPortWidth,...)
         /**Create FitViewPort to maintain virtual aspect ratio despite screen*/
-        //Gdx.graphics.getWidth(), Gdx.graphics.getHeight();
-
         gamePort = new FitViewport(VelocidadeEscaldante.largura /VelocidadeEscaldante.PPM, VelocidadeEscaldante.altura /VelocidadeEscaldante.PPM , gameCamera);
-        //Test with */
-        //could use the Screenviewport*/
 
         gameInformation = new EcraVizualizado(game.batch);
         /**Load our map and setup our map renderer*/
 
         maploader = new TmxMapLoader();
-
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load("android/assets/roadv6.tmx", TiledMap.class);
@@ -85,9 +78,9 @@ public class EcraJogo implements Screen {
         world = new World(new Vector2(0,0),true);
 
         //allows the debug lines fo our  box2d world
-        b2dr = new Box2DDebugRenderer();
+        //b2dr = new Box2DDebugRenderer();
 
-        new B2WorldCreator( world, map );
+        //new B2WorldCreator( world, map );
 
         //Creates car in our world
         player = new CarroControlado(world);
@@ -118,9 +111,7 @@ public class EcraJogo implements Screen {
      * @param dt recives a float delta time
      * */
     public void update(float dt){
-        //TODO add MOBILE working with Android
-            handleInput(dt);
-
+        handleInput(dt);
         /**Take a time step. This performs collision detection, integration, and constraint solution.
          Parameters:
          @param timeStep - the amount of time to simulate, this should not vary.
@@ -134,6 +125,9 @@ public class EcraJogo implements Screen {
         /**tell our renderer to draw only what our camera can see in our game world*/
         renderer.setView(gameCamera);
     }
+    public void updateEcraVizualiazado(){
+        gameInformation.setWorldTimer((int) player.carroPositionY());
+    }
 
     @Override
     public void render(float delta) {
@@ -143,28 +137,22 @@ public class EcraJogo implements Screen {
         Gdx.gl.glClearColor(1,1,1,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-    /** to render what camera can see*/
-//    game.batch.setProjectionMatrix(gamecamera.combined);
-    /***/
-//    game.batch.begin();
-//    game.batch.draw(texture,0,0);
-//    game.batch.end();
-
         /**renderer our game map*/
         renderer.render();
 
-        //TODO do  run to check if there is a green line around the objects
-        //there is a green line but not sure if actual is the map correct
-
         /**Renderer our BOX2dDebugLines*/
-        b2dr.render(world, gameCamera.combined);
+        //b2dr.render(world, gameCamera.combined);
         /**Set our batch to now draw what HUD camera sees*/
         game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);
+        game.batch.begin();
+        player.update(delta);
+        game.batch.end();
+        updateEcraVizualiazado();
         gameInformation.stage.draw();
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int width, int height){
         gamePort.update(width,height);
     }
 
