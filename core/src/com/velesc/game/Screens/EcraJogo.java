@@ -47,22 +47,23 @@ public class EcraJogo implements Screen {
     /**Constructor*/
     public EcraJogo(VelocidadeEscaldante game){
         this.game = game;
-
-        /**Create cam used to follow the car through cam world*/
-        gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-        gameCamera.translate(gameCamera.viewportWidth/2,gameCamera.viewportHeight/2);
-        /**Create FitViewPort to maintain virtual aspect ratio despite screen*/
-        gamePort = new FitViewport(VelocidadeEscaldante.largura /VelocidadeEscaldante.PPM, VelocidadeEscaldante.altura /VelocidadeEscaldante.PPM , gameCamera);
-
-        gameInformation = new EcraVizualizado(game.batch);
-        /**Load our map and setup our map renderer*/
-
         maploader = new TmxMapLoader();
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load("android/assets/roadv6.tmx", TiledMap.class);
         assetManager.finishLoading();
         map = assetManager.get("android/assets/roadv6.tmx");
+
+
+        /**Create cam used to follow the car through cam world*/
+        gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+        gameCamera.translate(gameCamera.viewportWidth/VelocidadeEscaldante.PPM,gameCamera.viewportHeight/VelocidadeEscaldante.PPM);
+        /**Create FitViewPort to maintain virtual aspect ratio despite screen*/
+        gamePort = new FitViewport(VelocidadeEscaldante.largura /VelocidadeEscaldante.PPM, VelocidadeEscaldante.altura /VelocidadeEscaldante.PPM , gameCamera);
+
+        gameInformation = new EcraVizualizado(game.batch);
+        /**Load our map and setup our map renderer*/
+
 
         // The unit scales tells the renderer how many pixels map to a single world unit. In the
         //bellow case 16 pixels would equal one unit.  The unit scale is a way to couple your rendering
@@ -71,7 +72,7 @@ public class EcraJogo implements Screen {
 
         /**TODO certificar se a camera esta no sitio correcto*/
         /**initially set our gamCam to be centered correctly at the start of*/
-        gameCamera.position.set(gamePort.getWorldWidth(),gamePort.getWorldHeight(), 0);
+        gameCamera.position.set(VelocidadeEscaldante.largura/VelocidadeEscaldante.PPM,gamePort.getWorldHeight(), 0);
         //gamePort.getWorldWidth(),gamePort.getWorldHeight()
         /***world class manages all physics entities, dynamic simulation, and asynchronous queries. The world
          also contains efficient memory management facilities */
@@ -83,7 +84,7 @@ public class EcraJogo implements Screen {
         //new B2WorldCreator( world, map );
 
         //Creates car in our world
-        player = new CarroControlado(world);
+        player = new CarroControlado(world, 50, 50, assets.CAMARO.getWidth(), assets.CAMARO.getHeight());
 
     }
 
@@ -112,21 +113,19 @@ public class EcraJogo implements Screen {
      * */
     public void update(float dt){
         handleInput(dt);
-        /**Take a time step. This performs collision detection, integration, and constraint solution.
-         Parameters:
-         @param timeStep - the amount of time to simulate, this should not vary.
-         @param velocityIterations - for the velocity constraint solver.
-         @param positionIterations - for the position constraint solver.*/
-        world.step(1/60f,6,2);
+        gameInformation.addVelocidade(player.carroPositionY());
+        gameInformation.addPontos(player.carroPositionX());
+        gameInformation.update(dt);
+       // world.step(1/60f,16,2);
         /**tracking the car with game camera*/
-        gameCamera.position.y = player.b2body.getPosition().y;
+        gameCamera.position.y = player.getBodyCarroControlado().getPosition().y;
         /**update our gamecam with correct coordinates after changes*/
         gameCamera.update();
         /**tell our renderer to draw only what our camera can see in our game world*/
         renderer.setView(gameCamera);
     }
     public void updateEcraVizualiazado(){
-        gameInformation.setWorldTimer((int) player.carroPositionY());
+        this.gameInformation.setWorldTimer(player.carroPositionY());
     }
 
     @Override
@@ -145,9 +144,8 @@ public class EcraJogo implements Screen {
         /**Set our batch to now draw what HUD camera sees*/
         game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);
         game.batch.begin();
-        player.update(delta);
+        player.update();
         game.batch.end();
-        updateEcraVizualiazado();
         gameInformation.stage.draw();
     }
 

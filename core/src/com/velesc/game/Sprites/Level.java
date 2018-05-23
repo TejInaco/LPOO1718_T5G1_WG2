@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class Level {
 
-    private Car car;
+//    private CarroControlado car;
     private Timer timer;
     private Array<LimitsArea> limitsAreas;
     private FinishedLine finishLine;
@@ -28,9 +28,9 @@ public class Level {
         this.rowHeight = rowHeight;
         this.levelRowRoadOffset = new int[levelLength];
         this.limitsAreas = new Array<LimitsArea>();
-        this.startPosX = (screenWidth/2)-(Car.WIDTH/2);
+//        this.startPosX = (screenWidth/2)-(Car.WIDTH/2);
         this.startPosY = 20;
-        this.car = new Car(new Vector2(startPosX, startPosY));
+//        this.car = new CarroControlado(new Vector2(startPosX, startPosY));
         this.timer = new Timer();
         generateOffsets();
         generateLimitsAreas();
@@ -40,8 +40,8 @@ public class Level {
 
     // TODO Generate new layout on restart for variety?
     public void restartLevel() {
-        car.stopCar();
-        car.setPosition(new Vector2(startPosX, startPosY));
+//        car.stopCar();
+//        car.setPosition(new Vector2(startPosX, startPosY));
         timer.reset();
         timer.start();
     }
@@ -71,9 +71,9 @@ public class Level {
         finishLine = new FinishedLine(0, levelRows * rowHeight, screenWidth, 40);
     }
 
-    public Car getCar() {
-        return car;
-    }
+//    public Car getCar() {
+//        return car;
+//    }
 
     public Timer getTimer() {
         return timer;
@@ -94,9 +94,9 @@ public class Level {
     }
 
     public float getProgressDecimalFraction() {
-        float carNose = getCar().getBounds().getY() + getCar().getBounds().getHeight();
+//        float carNose = getCar().getBounds().getY() + getCar().getBounds().getHeight();
         float finishLine = getFinishLine().getBounds().getY();
-        return (carNose/finishLine);
+        return 0;//(carNose/finishLine);
     }
 
     public int getRowHeight() {

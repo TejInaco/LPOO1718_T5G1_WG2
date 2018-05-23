@@ -14,7 +14,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.sun.corba.se.impl.orb.ORBVersionImpl;
 import com.velesc.game.Assets;
 import com.velesc.game.VelocidadeEscaldante;
 
@@ -24,64 +23,47 @@ import java.awt.geom.PathIterator;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RectangularShape;
 
-public class CarroControlado {
+public class CarroControlado extends InteractiveTileObject{
 
     private OrthographicCamera gameCamera;
 
     public SpriteBatch batch;
     public Sprite sprite;
+    Assets assets;
 
-    public World world;
-    public Body b2body;
 
-    Assets assets = new Assets();
-
-    public CarroControlado(World world){
-        this.world = world;
-        create();
-    }
-    public float carroPositionY(){
-        return b2body.getPosition().y;
-    }
-
-    public void create(){
+    public CarroControlado(World world, int boundsX, int boundsY, int sprite_largura, int sprite_altura){
+        super(world, boundsX, boundsY, sprite_largura, sprite_altura);
         batch = new SpriteBatch();
         sprite = new Sprite();
-
-        BodyDef bdef = new BodyDef();
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        bdef.position.set(50,50); //Posicao inicial
-
-        //Create a physics world. The vector is passed in is gravity
-        //world = new World(new Vector2(0,-98f), true);
-        b2body = world.createBody(bdef);
-
-        //create a rectangular shape for the car
-        PolygonShape polygonShape = new PolygonShape();
-        polygonShape.setAsBox(2,6);
-
-        //set physics atributes
-        FixtureDef fdef = new FixtureDef();
-        fdef.shape = polygonShape;
-
-        //TODO Density 1f ?
-        fdef.density = 10f;
-        fdef.restitution = 0.5f;
-        fdef.friction = 0.5f;
-
-        b2body.createFixture(fdef);
+        assets = new Assets();
 
     }
+//For debuging  - 1
+    public int carroPositionY(){
+        return (int) this.getBodyCarroControlado().getPosition().y;
+    }
+    public int carroPositionX(){
+        return (int) this.getBodyCarroControlado().getPosition().x;
+    }
+    public Body getBodyCarroControlado(){
+        return body;
+    }
+    public float getLinearVelocity(){
+        return this.body.getLinearVelocity().y;
+    }
+    public Vector2 getPosition(){
+        return this.body.getPosition();
+    }
 
+//For debuging -1 -end
 
-    public void update(float delta){
-        world.step(Gdx.graphics.getDeltaTime(),6,2);
-        sprite.setPosition(b2body.getPosition().x, b2body.getPosition().y);
+    public void update(){
+        world.step(Gdx.graphics.getDeltaTime(),2,2);
+        sprite.setPosition(body.getPosition().x, body.getPosition().y);
         batch.begin();
-        batch.draw(assets.CAMARO,b2body.getPosition().x,b2body.getPosition().y,50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
+        batch.draw(assets.CAMARO,body.getPosition().x,body.getPosition().y,50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
         batch.end();
-
-
     }
 
 }

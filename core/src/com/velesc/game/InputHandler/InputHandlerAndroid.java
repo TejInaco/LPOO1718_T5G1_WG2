@@ -32,23 +32,23 @@ public class InputHandlerAndroid {
         gyroY += Gdx.input.getGyroscopeY();
 
 
-        Vector2 vel = player.b2body.getLinearVelocity();
-        Vector2 pos = player.b2body.getPosition();
+        float velociActual = player.getLinearVelocity();
+        Vector2 pos = player.getBodyCarroControlado().getPosition();
 
-        if(gyroY > 0.5f && vel.x < fisica.MAX_VELOCITY ) { //player.b2body.getWorldCenter()
-            player.b2body.applyLinearImpulse(0, 80f, pos.x, pos.y, true);
+        if(gyroY > 0.5f && velociActual < fisica.MAX_VELOCITY.y ) { //player.b2body.getWorldCenter()
+            player.getBodyCarroControlado().applyLinearImpulse(0, 80f, pos.x, pos.y, true);
             Gdx.input.vibrate(100);
         }
         if(gyroX > 0.5f) {//Left
-            player.b2body.applyLinearImpulse(1000f, 0, pos.x, pos.y, true);
+            player.getBodyCarroControlado().applyLinearImpulse(1000f, 0, pos.x, pos.y, true);
             Gdx.input.vibrate(100);
         }
         if(gyroX < -0.5f) {//Right
-            player.b2body.applyLinearImpulse(-1000f, 0, pos.x, pos.y, true);
+            player.getBodyCarroControlado().applyLinearImpulse(-1000f, 0, pos.x, pos.y, true);
             Gdx.input.vibrate(100);
         }
         if(gyroY < -0.5f) {
-            player.b2body.applyLinearImpulse(0, -100f,pos.x,pos.y,true);
+            player.getBodyCarroControlado().applyLinearImpulse(0, -100f,pos.x,pos.y,true);
         }
     }
 

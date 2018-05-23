@@ -1,7 +1,9 @@
 package com.velesc.game.Sprites;
 
+import com.badlogic.gdx.math.Vector2;
+
 public class Fisica {
-    public int MAX_VELOCITY = 0;
+    public Vector2 MAX_VELOCITY = new Vector2(0,10);
 
     public Fisica(){
 

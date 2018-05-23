@@ -23,6 +23,7 @@ public class EcraVizualizado  implements Disposable{
     private Viewport viewport;
 
     //Time and score for the car Tracking variables
+    private float timeCount;
     private Integer tempoContador;
     private Integer pontos;
     private Integer velocidadeCarro;
@@ -34,6 +35,8 @@ public class EcraVizualizado  implements Disposable{
     Label tempoContador_NameLabel;
     Label pontos_NameLabel;
     Label velocidadeCarro_NameLabel;
+
+    public EcraVizualizado(){}
 
     public EcraVizualizado(SpriteBatch sb) {
         tempoContador = 0;
@@ -71,10 +74,60 @@ public class EcraVizualizado  implements Disposable{
 
         stage.addActor(table);
     }
+
+    /**
+     * Sets and Gets
+     * */
+    public void setTimeCount(){
+        timeCount = 0;
+    }
+    public void setTempoContador(int value){
+        tempoContador = value;
+    }
+    public void setPontos(int value){
+        pontos = value;
+    }
+    public void setVelocidadeCarro(int value){
+        velocidadeCarro = value;
+    }
+    public float getTimeCount(){
+        return timeCount;
+    }
+    public int getTempoContador(){
+        return tempoContador;
+    }
+    public int getPontos(){
+        return pontos;
+    }
+    public int getVelocidadeCarro(){
+        return velocidadeCarro;
+    }
     public void setWorldTimer(Integer value){
         this.tempoContador  = value;
     }
+    public void update(float dt){
+        timeCount += dt;
+        if(timeCount >= 1){
+            tempoContador++;
+            tempoContadorLabel.setText(String.format("%03d",tempoContador));
+            timeCount = 0;
 
+        }
+    }
+    public void setPontos_NameLabel(int pontos){
+        pontosLabel.setText(String.format("%06d",pontos));
+    }
+
+    public void addPontos(int value){
+        //pontos += value;
+        pontos = value;                        //for debuging
+        setPontos_NameLabel(pontos);
+    }
+
+    public void addVelocidade (int value){
+        velocidadeCarro = value;
+        velocidadeCarroLabel.setText(String.format("%03d", velocidadeCarro));
+    }
 
     @Override
     public void dispose() {
