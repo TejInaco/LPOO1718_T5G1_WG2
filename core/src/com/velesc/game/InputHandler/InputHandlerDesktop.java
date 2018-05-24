@@ -11,28 +11,34 @@ import com.velesc.game.Sprites.Fisica;
  * Class responsible only for the desktop inputs to control the car player
  * */
 public class InputHandlerDesktop {
-    Fisica fisica;
+    CarroControlado player;
 
-    public InputHandlerDesktop(CarroControlado player, float dt){
-        this.fisica = new Fisica();
+    public InputHandlerDesktop(CarroControlado player, float dt) {
+        this.player = player;
 
+    }
+
+    public void inputManager(){
         float vel = player.getLinearVelocity();
         Vector2 pos = player.getBodyCarroControlado().getPosition();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.UP) && vel < fisica.MAX_VELOCITY.y ) { //player.b2body.getWorldCenter()
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) && vel < player.getFisica().MAX_VELOCITY.y) { //player.b2body.getWorldCenter()
             player.getBodyCarroControlado().applyLinearImpulse(0, 80f, pos.x, pos.y, true);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (!player.getFlagBoundariesRight()) {
+                player.getBodyCarroControlado().applyLinearImpulse(1000f, 0, pos.x, pos.y, true);
             }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            player.getBodyCarroControlado().applyLinearImpulse(1000f, 0, pos.x, pos.y, true);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            if (!player.getFlagBoundariesLeft()) {
+                player.getBodyCarroControlado().applyLinearImpulse(-1000f, 0, pos.x, pos.y, true);
             }
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            player.getBodyCarroControlado().applyLinearImpulse(-1000f, 0, pos.x, pos.y, true);
-            }
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            player.getBodyCarroControlado().applyLinearImpulse(0, -100f,pos.x,pos.y,true);
-            }
-        //  Old movement equation
-        // new Vector2(-6000f,0), player.b2body.getWorldCenter(),true and
-        // used isKeyJustPressed
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            player.getBodyCarroControlado().applyLinearImpulse(0, -100f, pos.x, pos.y, true);
+        }
     }
+
+
 }

@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.velesc.game.Assets;
 import com.velesc.game.InputHandler.InputHandlerAndroid;
 import com.velesc.game.InputHandler.InputHandlerDesktop;
+import com.velesc.game.Sprites.CarroSecundario;
 import com.velesc.game.Tools.B2WorldCreator;
 import com.velesc.game.VelocidadeEscaldante;
 import com.velesc.game.Sprites.CarroControlado;
@@ -42,6 +43,7 @@ public class EcraJogo implements Screen {
     private Box2DDebugRenderer b2dr;
 
     public  CarroControlado player;
+    public  CarroSecundario enemies;
     Assets assets = new Assets();
 
     /**Constructor*/
@@ -85,6 +87,7 @@ public class EcraJogo implements Screen {
 
         //Creates car in our world
         player = new CarroControlado(world, 50, 50, assets.CAMARO.getWidth(), assets.CAMARO.getHeight());
+//        enemies = new CarroSecundario(world);
 
     }
 
@@ -103,8 +106,8 @@ public class EcraJogo implements Screen {
             InputHandlerAndroid inputandroid = new InputHandlerAndroid( player, dt);
             inputandroid.inputmanager();
         }else{
-            InputHandlerDesktop inputdesktop;
-            inputdesktop = new InputHandlerDesktop(player,dt);
+            InputHandlerDesktop inputdesktop = new InputHandlerDesktop(player,dt);
+            inputdesktop.inputManager();
         }
 
     }
@@ -116,9 +119,9 @@ public class EcraJogo implements Screen {
         gameInformation.addVelocidade(player.carroPositionY());
         gameInformation.addPontos(player.carroPositionX());
         gameInformation.update(dt);
-       // world.step(1/60f,16,2);
+//        world.step(1/60f,16,2);
         /**tracking the car with game camera*/
-        gameCamera.position.y = player.getBodyCarroControlado().getPosition().y;
+        gameCamera.position.y = player.getBodyCarroControlado().getPosition().y/0.05f;
         /**update our gamecam with correct coordinates after changes*/
         gameCamera.update();
         /**tell our renderer to draw only what our camera can see in our game world*/

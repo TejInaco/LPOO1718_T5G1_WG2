@@ -23,6 +23,11 @@ public final class Assets {
     public static Texture TOP = new Texture(Gdx.files.internal("android/assets/Velocidade.png"));
     public static Texture BUTTOM = new Texture(Gdx.files.internal("android/assets/Escaldante.png"));
     public static Texture CAMARO = new Texture(Gdx.files.internal("android/assets/camaro.png"));
+    //Cars on the road
+    public static Texture CAR_1 = new Texture(Gdx.files.internal("android/assets/vehic_car0.png"));
+    public static Texture CAR_2 = new Texture(Gdx.files.internal("android/assets/vehic_car2.png"));
+    public static Texture CAR_3 = new Texture(Gdx.files.internal("android/assets/vehic_car3.png"));
+    public static Texture CAR_4 = new Texture(Gdx.files.internal("android/assets/vehic_taxi0.png"));
 
     public Assets(){
 
@@ -38,5 +43,9 @@ public final class Assets {
         TOP.dispose();
         BUTTOM.dispose();
         CAMARO.dispose();
+        CAR_1.dispose();
+        CAR_2.dispose();
+        CAR_3.dispose();
+        CAR_4.dispose();
     }
 }
