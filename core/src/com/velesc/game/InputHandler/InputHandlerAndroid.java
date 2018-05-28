@@ -11,11 +11,14 @@ import sun.management.Sensor;
 import javax.naming.Context;
 
 public class InputHandlerAndroid {
+    private final float LIMITS_SENSIBILITY_POS = 0.5f;
+    private final float LIMITS_SENSIBILITY_NEG = -0.5f;
+    private final int VIBRATION_TIME = 100;
+
     CarroControlado player;
 
     private boolean gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
-    //    private SensorManager sensorManager;
-//    private Sensor sensor;
+
     private float gyroX = 0;
     private float gyroY = 0;
     Fisica fisica = new Fisica();
@@ -35,20 +38,21 @@ public class InputHandlerAndroid {
         float velociActual = player.getLinearVelocity();
         Vector2 pos = player.getBodyCarroControlado().getPosition();
 
-        if(gyroY > 0.5f && velociActual < fisica.MAX_VELOCITY.y ) { //player.b2body.getWorldCenter()
+        if(gyroY > LIMITS_SENSIBILITY_POS && velociActual < fisica.MAX_VELOCITY.y ) { //player.b2body.getWorldCenter()
             player.getBodyCarroControlado().applyLinearImpulse(0, 80f, pos.x, pos.y, true);
-            Gdx.input.vibrate(100);
+            Gdx.input.vibrate(VIBRATION_TIME);
         }
-        if(gyroX > 0.5f) {//Left
+        if(gyroX > LIMITS_SENSIBILITY_POS) {//Left
             player.getBodyCarroControlado().applyLinearImpulse(1000f, 0, pos.x, pos.y, true);
-            Gdx.input.vibrate(100);
+            Gdx.input.vibrate(VIBRATION_TIME);
         }
-        if(gyroX < -0.5f) {//Right
+        if(gyroX < LIMITS_SENSIBILITY_NEG) {//Right
             player.getBodyCarroControlado().applyLinearImpulse(-1000f, 0, pos.x, pos.y, true);
-            Gdx.input.vibrate(100);
+            Gdx.input.vibrate(VIBRATION_TIME);
         }
-        if(gyroY < -0.5f) {
+        if(gyroY < LIMITS_SENSIBILITY_NEG) {
             player.getBodyCarroControlado().applyLinearImpulse(0, -100f,pos.x,pos.y,true);
+            Gdx.input.vibrate(VIBRATION_TIME);
         }
     }
 

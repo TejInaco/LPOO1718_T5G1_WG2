@@ -7,18 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.velesc.game.Screens.*;
 
 /**
- * Class to define the general definitions of the game
- * Invokes Menu
- *
- * NOTE:
- * Our class #velEscaldGamge#  belongs to CLASS game [contain methods set and get screen].
- * This last one implements the <Interface>
- *     ApplicationListener.
- * ApplicationAdapter implements ApplicationListener as well
- * This class allows the developer to implement the ApplicationListener interface without
- * overriding every method.
- *
- * If I changed the extends to ApplicationListener no error will be shown
+ * Class Start-up
  * */
 public class VelocidadeEscaldante extends Game {
 
@@ -27,7 +16,7 @@ public class VelocidadeEscaldante extends Game {
 
     public static final float PPM = 16; //Pixels per meter
 
-    public static boolean IS_MOBILE = false;
+    private static boolean IS_MOBILE = false;
     //images in textures
     public SpriteBatch batch;
     public BitmapFont font;
@@ -36,7 +25,6 @@ public class VelocidadeEscaldante extends Game {
     @Override
 	public void create () {
         batch = new SpriteBatch();
-        //the game itself
         font = new BitmapFont();
 
 
@@ -44,13 +32,14 @@ public class VelocidadeEscaldante extends Game {
             IS_MOBILE = true;
         }
         // EcraJogo
-        this.setScreen(new EcraJogo(this));
+        this.setScreen(new MainMenuScreen(this));
+    }
+    public boolean getIsMobile(){
+        return IS_MOBILE;
     }
 
-    //delegates to the play screen
 	@Override
 	public void render(){
-
         super.render();
 	}
 	@Override

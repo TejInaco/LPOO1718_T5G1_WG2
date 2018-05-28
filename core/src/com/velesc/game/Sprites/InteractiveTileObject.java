@@ -1,31 +1,22 @@
 package com.velesc.game.Sprites;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTile;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.physics.box2d.*;
-import com.velesc.game.Assets;
 import com.velesc.game.VelocidadeEscaldante;
 
 public abstract class InteractiveTileObject {
 
     protected World world;
-
-    // protected TiledMapTile tile;
-    protected Rectangle bounds;
     protected Body body;
 
 
 
-    private  int posINI_X;
-    private  int posINI_Y;
+    private  float posINI_X;
+    private  float posINI_Y;
 
-    private  int sprite_largura;
-    private  int sprite_altura;
+    private  float sprite_largura;
+    private  float sprite_altura;
 
-    public InteractiveTileObject(World world, int boundsX, int boundsY, int sprite_largura, int sprite_altura){
+    public InteractiveTileObject(World world, float boundsX, float boundsY, float sprite_largura, float sprite_altura){
         this.world = world;
         this.posINI_X = boundsX;
         this.posINI_Y = boundsY;
