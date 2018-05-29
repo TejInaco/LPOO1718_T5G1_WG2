@@ -1,6 +1,60 @@
-A segunda parte do projecto incide sobre um jogo onde o user controlará um carro numa estrada, onde evita colisões com outros
-carros ou outros objectos numa estrada com 3 vias. Quanto mais rápido percorrer a via maior sem colisões maior é o seu score. 
-O jogo será em 2D com top view.
+@finalRelease
+
+Platform -specific executable files
+-Java for multiple platforms
+-Apk for Android
+
+javadoc documentation files
+
+Content in read.me
+
+Setup installation procedure
+-> how to install de developemeetn enviroment
+-> how to install/run the game/app
+Updated UML diagrams
+Diagrama de classes
+(rascunho feito)
+Diagrama de Estados
+(rascunho feito)
+Diagrama de Sequências
+
+
+Design Patterns usadas:
+
+»Singleton: A classe VelocidadeEscaldante é a classe com uma única instanciação
+»Flywieght: tendo em conta o uso de texturas no jogo, e sendo que muitas das  texturas são reusadas em diferentes locais, o Design Pattern FLyweight é implementado através da nossa classe Assets, que tem como resposabilidade o load das texturas usadas no jogo e o seu dispose().
+»Update Method: Na maior parte dos objectos implementa-se o método update(delta) para simular um frame do comportamento do objecto. A ideia consiste no jogo fazer o update() em toda a rede de objectos.
+»Compontent
+Em continuação da ideia anterior do Updated Method, o Design Pattern foi utilizado na class CarroControlado em que foi definida uma classe InputHandler, para controlo do CarroControlado quer para Desktop quer para Android, uma classe Fisica, para efectuar os cálculos comportamentais
+
+Design decisions
+
+Principais Dificuldades:
+
+As principais dificuldades centram em 3 pontos essencias: pouco espaço temporal para compreensão da framework libgdx, uso e o processamento do tiled maps e dos seus objectos que nos levou a reconsiderar outros caminhos de implementação, e por último, a implementação de testes
+
+Lições apreendidas:
+
+overrall time spent developing 
+work distribution
+
+Distribuição igualitária entre os membros do grupo
+
+User manual with screen shotts - how to play /use the game
+
+Ao incializar o jogo é apresentado o ecrã de boas vindas.
+Pressionar qualquer tecla para passar ao menu
+Seleccionar com o mouse Play, Exit ou Scores
+Utilizar as setas para controlar o carro
+
+
+
+
+
+
+
+
+
 
 ## Architecture Design
 
