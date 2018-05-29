@@ -11,14 +11,13 @@ import com.velesc.game.Sprites.Fisica;
  * Class responsible only for the desktop inputs to control the car player
  * */
 public class InputHandlerDesktop {
-    CarroControlado player;
 
-    public InputHandlerDesktop(CarroControlado player, float dt) {
-        this.player = player;
+
+    public InputHandlerDesktop() {
 
     }
 
-    public void inputManager(){
+    public void updateInputDesktop(CarroControlado player){
         float vel = player.getLinearVelocity();
         Vector2 pos = player.getBodyCarroControlado().getPosition();
 
@@ -39,6 +38,5 @@ public class InputHandlerDesktop {
             player.getBodyCarroControlado().applyLinearImpulse(0, -100f, pos.x, pos.y, true);
         }
     }
-
 
 }

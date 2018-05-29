@@ -40,10 +40,10 @@ public class CarrosSecundariosManager{
 
     Vector2 posicao;
 
-    CarroSecundario carroSecundario_0;
-//    CarroSecundario carroSecundario_1;
-//    CarroSecundario carroSecundario_2;
-//    CarroSecundario carroSecundario_3;
+    Enemies carroSecundario_0;
+//    Enemies carroSecundario_1;
+//    Enemies carroSecundario_2;
+//    Enemies carroSecundario_3;
 
     public CarrosSecundariosManager(World world) {
         this.world = world;
@@ -57,7 +57,7 @@ public class CarrosSecundariosManager{
         CAR_0_text = assets.CAR_0;
 
         posicao = new Vector2(CAR_0_POSITION_X, 50);
-        carroSecundario_0 = new CarroSecundario(world,posicao, assets.CAR_0);
+        carroSecundario_0 = new Enemies(world,posicao, assets.CAR_0);
         carroSecundario_0.setLinearVelocity(fisica.MEDIUM_DRIVER);
         //        CAR_1_text = assets.CAR_1;
 //        CAR_2_text = assets.CAR_2;
@@ -73,13 +73,13 @@ public class CarrosSecundariosManager{
     }
     public void carsDistribution(){
 
-//        carroSecundario_1 = new CarroSecundario(world,CAR_1_POSITION_X);
-//        carroSecundario_2 = new CarroSecundario(world,CAR_2_POSITION_X);
-//        carroSecundario_3 = new CarroSecundario(world,CAR_3_POSITION_X);;
+//        carroSecundario_1 = new Enemies(world,CAR_1_POSITION_X);
+//        carroSecundario_2 = new Enemies(world,CAR_2_POSITION_X);
+//        carroSecundario_3 = new Enemies(world,CAR_3_POSITION_X);;
 
     }
 
-    public void update(Body playerPos){
+    public void update(){
 //        //Por a posicao do jogador no y referencial
 //        this.setReferencialPosition(playerPos);
 ////        world.step(Gdx.graphics.getDeltaTime(),2,2);

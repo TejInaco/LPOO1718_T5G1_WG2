@@ -14,6 +14,10 @@ public class Fisica {
     public static final float IMPULSE_LEFT = 1f;
     public static final float IMPULSE_BACK = 1f;
     public static final float IMPULSE_FRONT = 1f;
+    public static final float DENSITY = 0.15f;
+    public static final float RESTITUTION = 0.5f;
+    public static final float FRICTION = 0.5f;
+
     public Fisica(){
     }
 }

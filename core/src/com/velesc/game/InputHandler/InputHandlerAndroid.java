@@ -15,21 +15,18 @@ public class InputHandlerAndroid {
     private final float LIMITS_SENSIBILITY_NEG = -0.5f;
     private final int VIBRATION_TIME = 100;
 
-    CarroControlado player;
-
     private boolean gyroscopeAvail = Gdx.input.isPeripheralAvailable(Input.Peripheral.Gyroscope);
 
     private float gyroX = 0;
     private float gyroY = 0;
     Fisica fisica = new Fisica();
 
-    public InputHandlerAndroid(CarroControlado player1, float dt) {
-        this.player = player1;
+    public InputHandlerAndroid() {
         if(!gyroscopeAvail)throw new IllegalArgumentException();
   //      sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
 
-    public void inputmanager(){
+    public void updateInputAndroid(CarroControlado player){
 
         gyroX += Gdx.input.getGyroscopeX();
         gyroY += Gdx.input.getGyroscopeY();

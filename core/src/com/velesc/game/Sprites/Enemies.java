@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 
-public class CarroSecundario extends InteractiveTileObject {
+public class Enemies extends Carro {
 
 
     public static final int WIDTH = 30;
@@ -14,7 +14,7 @@ public class CarroSecundario extends InteractiveTileObject {
     private Vector2 velocity = new Vector2();
     private Boolean decelerating;
 
-    public CarroSecundario(World world, Vector2 positionCar, Texture text){
+    public Enemies(World world, Vector2 positionCar, Texture text){
         super(world, positionCar.x, positionCar.y, text.getWidth(), text.getHeight());
 
     }
@@ -26,7 +26,9 @@ public class CarroSecundario extends InteractiveTileObject {
     }
 
 
+    public void update(){
 
+    }
 
 
 //    public void update(float deltaTime) {

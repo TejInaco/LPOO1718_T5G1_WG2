@@ -62,14 +62,14 @@ public class EcraJogo implements Screen {
         this.renderer = new OrthogonalTiledMapRenderer(map, 1/VelocidadeEscaldante.PPM);
         setGameCameraPosition();
         this.world = new World(new Vector2(0,0),true);
-        this.player = new CarroControlado(world, CAR_INITIAL_POSITION_X, CAR_INITIAL_POSITION_Y, assets.CAMARO.getWidth(), assets.CAMARO.getHeight());
+        this.player = new CarroControlado(game, world, CAR_INITIAL_POSITION_X, CAR_INITIAL_POSITION_Y, assets.CAMARO.getWidth(), assets.CAMARO.getHeight());
         this.enemies = new CarrosSecundariosManager(world);
     }
     /**
      * Set Game camera center position
      * */
     public void setGameCameraPosition(){
-        gameCamera.position.set(VelocidadeEscaldante.largura/VelocidadeEscaldante.PPM,gamePort.getWorldHeight(), 0);
+        gameCamera.position.set(gamePort.getWorldWidth(),gamePort.getWorldHeight(), 0);
 
     }
     /**
@@ -95,20 +95,7 @@ public class EcraJogo implements Screen {
 
     }
 
-    /**
-     * Function to separate from the input from desktop and the input from android
-     * @param dt recives a float delta time
-     * */
-    public void handleInput(float dt){
-        if(this.game.getIsMobile() == true){
-            InputHandlerAndroid inputandroid = new InputHandlerAndroid(this.player, dt);
-            inputandroid.inputmanager();
-        }else{
-            InputHandlerDesktop inputdesktop = new InputHandlerDesktop(this.player,dt);
-            inputdesktop.inputManager();
-        }
 
-    }
     /**
      * Updates Velocity, points and time in the game information area
      * @param dt recives a float delta time
@@ -134,7 +121,6 @@ public class EcraJogo implements Screen {
      * @param dt recives a float delta time
      * */
     public void update(float dt){
-        this.handleInput(dt);
         this.updateInformacaoDoJogo(dt);
         updateCameraPositionWithCarPosition();
         gameCamera.update();
@@ -154,8 +140,8 @@ public class EcraJogo implements Screen {
         //Set our batch to now draw what HUD camera sees
         game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);
         game.batch.begin();
-        enemies.update(player.getBodyCarroControlado());
-        player.update();
+        enemies.update();
+        player.update(delta);
         game.batch.end();
         gameInformation.stage.draw();
     }

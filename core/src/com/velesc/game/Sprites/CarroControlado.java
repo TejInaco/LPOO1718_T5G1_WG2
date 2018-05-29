@@ -6,13 +6,15 @@ import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.velesc.game.Assets;
+import com.velesc.game.InputHandler.InputHandlerAndroid;
+import com.velesc.game.InputHandler.InputHandlerDesktop;
+import com.velesc.game.VelocidadeEscaldante;
 
 
-public class CarroControlado extends InteractiveTileObject{
+public class CarroControlado extends Carro {
     private static int MAP_LEFT_LIMITS = 5;
     private static int MAP_RIGHT_LIMITS = 530;
-
-    private OrthographicCamera gameCamera;
+    VelocidadeEscaldante game;
     public SpriteBatch batch;
     public Sprite sprite;
 
@@ -24,8 +26,9 @@ public class CarroControlado extends InteractiveTileObject{
     private boolean flagBoundariesLeft = false;
 
 
-    public CarroControlado(World world, int boundsX, int boundsY, int sprite_largura, int sprite_altura){
+    public CarroControlado(VelocidadeEscaldante game,World world, int boundsX, int boundsY, int sprite_largura, int sprite_altura){
         super(world, boundsX, boundsY, sprite_largura, sprite_altura);
+        this.game = game;
         batch = new SpriteBatch();
         sprite = new Sprite();
         assets = new Assets();
@@ -116,10 +119,24 @@ public class CarroControlado extends InteractiveTileObject{
             this.flagBoundariesRight = false;
         }
     }
+    /**
+     * Function to separate from the input from desktop and the input from android
+     * @param delta recives a float delta time
+     * */
+    public void handleInput(float delta){
+        if(this.game.getIsMobile() == true){
+            InputHandlerAndroid inputandroid = new InputHandlerAndroid();
+            inputandroid.updateInputAndroid(this);
+        }else{
+            InputHandlerDesktop inputdesktop = new InputHandlerDesktop();
+            inputdesktop.updateInputDesktop(this);
+        }
 
-    public void update(){
+    }
+    public void update(float delta){
         world.step(Gdx.graphics.getDeltaTime(),2,2);
         checkBoundaries();
+        this.handleInput(delta);
         sprite.setPosition(body.getPosition().x, body.getPosition().y);
         batch.begin();
         batch.draw(assets.CAMARO,this.getPosition().x, this.getPosition().y,50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
