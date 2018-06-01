@@ -63,7 +63,7 @@ Utilizar as setas para controlar o carro
   O projecto utilizará a framework libGDX com foco no desenvolvimento em AndroidSDK e em Desktop.Utilizirá o package Physics
   Utilizou-se o diagram UML proposto pelo Prof André Restivo, onde se pretende acrescentar as classes especificas do jogo.
   
-  ![UML](Assets/UMLvelesc.png)
+  ![UML](UMLvelesc.png)
  
   
   
