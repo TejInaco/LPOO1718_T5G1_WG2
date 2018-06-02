@@ -26,12 +26,22 @@ public final class Assets {
     public final Texture CAMARO = new Texture(Gdx.files.internal("android/assets/camaro.png"));
     //Cars on the road
     public final Texture CAR_0 = new Texture(Gdx.files.internal("android/assets/vehic_car0.png"));
-    public final Texture CAR_1 = new Texture(Gdx.files.internal("android/assets/vehic_car2.png"));
-    public final Texture CAR_2 = new Texture(Gdx.files.internal("android/assets/vehic_car3.png"));
+    public final Texture CAR_1 = new Texture(Gdx.files.internal("android/assets/vehic_car8.png"));
+    public final Texture CAR_2 = new Texture(Gdx.files.internal("android/assets/vehic_car9.png"));
     public final Texture CAR_3 = new Texture(Gdx.files.internal("android/assets/vehic_taxi0.png"));
+
+    /**
+     * vehic_car2
+     * vehic_car3
+     *
+     *
+     */
 
     public Assets(){
 
+    }
+    public Texture getCamaro(){
+        return CAMARO;
     }
     public void dispose(){
         TEXTURE_PLAY.dispose();

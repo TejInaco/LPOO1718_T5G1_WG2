@@ -8,15 +8,24 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.velesc.game.Assets;
 import com.velesc.game.InputHandler.InputHandlerAndroid;
 import com.velesc.game.InputHandler.InputHandlerDesktop;
+import com.velesc.game.Screens.EcraJogo;
 import com.velesc.game.VelocidadeEscaldante;
+import com.badlogic.gdx.graphics.Texture;
 
-
-public class CarroControlado extends Carro {
+public class CarroControlado extends Sprite {
+    public enum State { STOP, DRIVING, COLLISION,  FINISHING_LINE };
+    public State currentState;
+    //public State previousState;
     private static int MAP_LEFT_LIMITS = 5;
     private static int MAP_RIGHT_LIMITS = 530;
-    VelocidadeEscaldante game;
+    private int initialPositionX = 50;
+    private int initialPositionY = 50;
+
+    public World world;
+    public Body body;
+    private EcraJogo screen;
+
     public SpriteBatch batch;
-    public Sprite sprite;
 
     Assets assets;
 
@@ -26,19 +35,43 @@ public class CarroControlado extends Carro {
     private boolean flagBoundariesLeft = false;
 
 
-    public CarroControlado(VelocidadeEscaldante game,World world, int boundsX, int boundsY, int sprite_largura, int sprite_altura){
-        super(world, boundsX, boundsY, sprite_largura, sprite_altura);
-        this.game = game;
+    public CarroControlado(EcraJogo screen){
+//        super(world, boundsX, boundsY, sprite_largura, sprite_altura);
+        this.screen = screen;
+        this.world = screen.getWorld();
         batch = new SpriteBatch();
-        sprite = new Sprite();
         assets = new Assets();
         fisica = new Fisica();
+
+        //Define Car in Box2d
+        defineCarro();
+
+        currentState = State.DRIVING;
+        setBounds(0,0 ,50/VelocidadeEscaldante.PPM, 50/VelocidadeEscaldante.PPM);
+
     }
-    public int carroPositionY(){
+    public void defineCarro(){
+
+        BodyDef bdef = new BodyDef();
+        bdef.position.set(initialPositionX/VelocidadeEscaldante.PPM,initialPositionY/VelocidadeEscaldante.PPM);
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        body = world.createBody(bdef);
+
+        FixtureDef fdef = new FixtureDef();
+        PolygonShape shape = new PolygonShape();
+        shape.setAsBox(assets.CAMARO.getWidth()/VelocidadeEscaldante.PPM, assets.CAMARO.getHeight()/VelocidadeEscaldante.PPM);
+        fdef.shape = shape;
+        fdef.density = fisica.DENSITY;
+        fdef.restitution = fisica.RESTITUTION;
+        fdef.friction = fisica.FRICTION;
+        body.createFixture(fdef).setUserData(this);
+
+    }
+    public int carroPositionY() {
         return (int) this.getBodyCarroControlado().getPosition().y;
     }
     public int carroPositionX(){
-        return (int) this.getBodyCarroControlado().getPosition().x;
+        return (int) ( this.getBodyCarroControlado().getPosition().x/VelocidadeEscaldante.PPM);
     }
     public Fisica getFisica(){
         return fisica;
@@ -123,23 +156,27 @@ public class CarroControlado extends Carro {
      * Function to separate from the input from desktop and the input from android
      * @param delta recives a float delta time
      * */
-    public void handleInput(float delta){
-        if(this.game.getIsMobile() == true){
+    public void handleInput(float delta) {
+        if (screen.getGame().getIsMobile() == true) {
             InputHandlerAndroid inputandroid = new InputHandlerAndroid();
             inputandroid.updateInputAndroid(this);
-        }else{
+        } else {
             InputHandlerDesktop inputdesktop = new InputHandlerDesktop();
             inputdesktop.updateInputDesktop(this);
         }
-
     }
+
+
     public void update(float delta){
         world.step(Gdx.graphics.getDeltaTime(),2,2);
         checkBoundaries();
         this.handleInput(delta);
-        sprite.setPosition(body.getPosition().x, body.getPosition().y);
+        if(getPosition().y > 80 ){
+            this.currentState = State.FINISHING_LINE;
+        }
         batch.begin();
-        batch.draw(assets.CAMARO,this.getPosition().x, this.getPosition().y,50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
+        batch.draw(assets.CAMARO,this.getPosition().x, this.getPosition().y,
+                50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
         batch.end();
     }
 

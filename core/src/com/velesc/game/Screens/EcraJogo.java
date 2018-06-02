@@ -13,9 +13,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.velesc.game.Assets;
-import com.velesc.game.InputHandler.InputHandlerAndroid;
-import com.velesc.game.InputHandler.InputHandlerDesktop;
-import com.velesc.game.Sprites.CarrosSecundariosManager;
+import com.velesc.game.Sprites.OtherCars;
 import com.velesc.game.VelocidadeEscaldante;
 import com.velesc.game.Sprites.CarroControlado;
 
@@ -43,8 +41,15 @@ public class EcraJogo implements Screen {
 
     //World, bodies and textures variables in the game
     private World world;
+    private Box2DDebugRenderer b2dr;
+
+
     public  CarroControlado player;
-    public  CarrosSecundariosManager enemies;
+    public OtherCars taxi;
+    public OtherCars civil1;
+    public OtherCars civil2;
+
+    private boolean gameOver =false;
     Assets assets = new Assets();
 
 
@@ -62,13 +67,28 @@ public class EcraJogo implements Screen {
         this.renderer = new OrthogonalTiledMapRenderer(map, 1/VelocidadeEscaldante.PPM);
         setGameCameraPosition();
         this.world = new World(new Vector2(0,0),true);
-        this.player = new CarroControlado(game, world, CAR_INITIAL_POSITION_X, CAR_INITIAL_POSITION_Y, assets.CAMARO.getWidth(), assets.CAMARO.getHeight());
-        this.enemies = new CarrosSecundariosManager(world);
+        this.player = new CarroControlado(this);
+
+    //TODO Check Point
+        this.taxi = new OtherCars(this, 75,600,-1, assets.CAR_3);
+        this.civil1 = new OtherCars(this,235,800,-2,assets.CAR_1);
+        this.civil2 = new OtherCars(this,380,1000, -3,assets.CAR_2);
+        //allows for debug lines of our box2d world
+        // x values for lines = 75 - 235 - 380
+        b2dr = new Box2DDebugRenderer();
+
+    }
+    public World getWorld(){
+        return world;
+    }
+    public VelocidadeEscaldante getGame(){
+        return game;
     }
     /**
      * Set Game camera center position
      * */
     public void setGameCameraPosition(){
+
         gameCamera.position.set(gamePort.getWorldWidth(),gamePort.getWorldHeight(), 0);
 
     }
@@ -95,7 +115,6 @@ public class EcraJogo implements Screen {
 
     }
 
-
     /**
      * Updates Velocity, points and time in the game information area
      * @param dt recives a float delta time
@@ -107,6 +126,9 @@ public class EcraJogo implements Screen {
         gameInformation.updateLabels();
         gameInformation.update(dt);
     }
+    /**
+     * @returns coordinate y of the player by secren racio
+     * */
     public float getCarPositionYDuringGame(){
         return player.getBodyCarroControlado().getPosition().y/GAME_CAMERA_RACIO;
     }
@@ -118,7 +140,7 @@ public class EcraJogo implements Screen {
     }
     /**
      * Updates HUD game information, game camera with car position and input received
-     * @param dt recives a float delta time
+     * @param dt receives a float delta time
      * */
     public void update(float dt){
         this.updateInformacaoDoJogo(dt);
@@ -127,6 +149,22 @@ public class EcraJogo implements Screen {
         renderer.setView(gameCamera);
     }
 
+    public boolean finishedLine(){
+        if(player.currentState == CarroControlado.State.FINISHING_LINE ){
+            return true;
+        }
+        return false;
+    }
+    /**
+     * //TODO check fuction collisions
+     * */
+    public void checkCollisions(float posPlayerX, float posPlayerY, float largura, float altura){
+        if(taxi.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ||
+            civil1.hitByEnemy(posPlayerX, posPlayerY,  largura, altura)  ||
+            civil2.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ){
+                gameOver = false;
+        }
+    }
 
     @Override
     public void render(float delta) {
@@ -136,14 +174,32 @@ public class EcraJogo implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
+        checkCollisions(player.getPosition().x, player.getPosition().y,
+                50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
+
+        //renderer our Box2DDebugLines
+        b2dr.render(world, gameCamera.combined);
 
         //Set our batch to now draw what HUD camera sees
-        game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);
+        game.batch.setProjectionMatrix(gameCamera.combined);
         game.batch.begin();
-        enemies.update();
+
+        taxi.update(delta);
+        civil1.update(delta);
+        civil2.update(delta);
         player.update(delta);
+
         game.batch.end();
+        game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);
         gameInformation.stage.draw();
+        if(gameOver){
+            game.setScreen(new GameOver(game));
+            dispose();
+        }
+        if(finishedLine()){
+            game.setScreen(new EcraJogo(game));
+            //TODO increase maximum speed
+        }
     }
 
     @Override
