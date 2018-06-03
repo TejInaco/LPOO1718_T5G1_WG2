@@ -14,12 +14,18 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.VelocidadeEscaldante;
 
+/**
+ * When the player successes in finishing the level
+ * */
 public class Finished implements Screen {
     private Viewport viewport;
     private Stage stage;
 
     private Game game;
 
+    /**
+     * Constructor
+     * */
     public Finished(Game game){
         this.game = game;
         viewport = new FitViewport(VelocidadeEscaldante.largura, VelocidadeEscaldante.altura, new OrthographicCamera());

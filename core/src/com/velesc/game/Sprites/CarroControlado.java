@@ -1,7 +1,6 @@
 package com.velesc.game.Sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
@@ -10,10 +9,9 @@ import com.velesc.game.InputHandler.InputHandlerAndroid;
 import com.velesc.game.InputHandler.InputHandlerDesktop;
 import com.velesc.game.Screens.EcraJogo;
 import com.velesc.game.VelocidadeEscaldante;
-import com.badlogic.gdx.graphics.Texture;
 
 public class CarroControlado extends Sprite {
-    public enum State { STOP, DRIVING,  FINISHING_LINE };
+    public enum State { STOP, DRIVING,  FINISHING_LINE }
     public State currentState;
     //public State previousState;
     private static int MAP_LEFT_LIMITS = 5;
@@ -61,7 +59,7 @@ public class CarroControlado extends Sprite {
         shape.setAsBox(assets.CAMARO.getWidth()/VelocidadeEscaldante.PPM, assets.CAMARO.getHeight()/VelocidadeEscaldante.PPM);
         fdef.shape = shape;
         fdef.density = fisica.DENSITY;
-        fdef.restitution = fisica.RESTITUTION;
+        fdef.restitution = Fisica.RESTITUTION;
         fdef.friction = fisica.FRICTION;
         body.createFixture(fdef).setUserData(this);
 
@@ -72,6 +70,9 @@ public class CarroControlado extends Sprite {
     public int carroPositionX(){
         return (int) ( this.getBodyCarroControlado().getPosition().x/VelocidadeEscaldante.PPM);
     }
+    /**
+     * GETS
+     * */
     public Fisica getFisica() {
         return fisica;
     }
@@ -84,17 +85,21 @@ public class CarroControlado extends Sprite {
     public Vector2 getPosition(){
         return this.body.getPosition();
     }
+    public State getCurrentState(){
+        return currentState;
+    }
+    /**
+     * SETS
+     * */
     public void setVelocityToZero(){
         if(getSpeedKMH() <= 0){
             this.currentState = State.STOP;
             this.getBodyCarroControlado().setLinearVelocity(0,0);
         }
     }
-    public State getCurrentState(){
-        return currentState;
-    }
+
     /**
-    * returns car's velocity vector relative to the car
+    * @return Vector2 car's velocity vector relative to the car
     */
     public Vector2 getLocalVelocity() {
         return this.body.getLocalVector(this.body.getLinearVelocityFromLocalPoint(new Vector2(0, 0)));
@@ -114,7 +119,6 @@ public class CarroControlado extends Sprite {
     public void setLinearVelocity(){
         this.getBodyCarroControlado().setLinearVelocity(0,this.getBodyCarroControlado().getLinearVelocity().y);
     }
-
     /**
      * Flag to check the left map limit
      * @return true if car position goes beyond the left limit

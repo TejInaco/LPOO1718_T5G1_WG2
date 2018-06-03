@@ -6,6 +6,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.velesc.game.Screens.EcraJogo;
 
+
 abstract class Enemy extends Sprite {
 
     protected World world;
@@ -23,18 +24,21 @@ abstract class Enemy extends Sprite {
         b2body.setActive(false);
     }
 
+    /**
+     * Defines the fixtures and body proprieties
+     * */
     protected abstract void defineEnemy();
 
     public abstract void update(float dt);
 
+    /**
+     * Collision checker
+     * @param posPlayerX actual player position in X axis
+     * @param posPlayerY actual player position in Y axis
+     * @param largura sprite wight
+     * @param altura sprite height
+     * @return true if there was a collision between bodies
+     * */
     public abstract boolean hitByEnemy(float posPlayerX, float posPlayerY, float largura, float altura);
-
-    public void reverseVelocity(boolean x, boolean y){
-        if(x)
-            velocity.x = -velocity.x;
-        if(y)
-            velocity.y = -velocity.y;
-    }
-
 
 }

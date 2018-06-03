@@ -1,23 +1,15 @@
 package com.velesc.game.Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.Assets;
 import com.velesc.game.MenuButtons;
-import com.velesc.game.Screens.EcraJogo;
 import com.velesc.game.VelocidadeEscaldante;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class MainMenuScreen implements Screen {
     private static final int  BUTTONS_WIDTH = 300;
@@ -26,28 +18,28 @@ public class MainMenuScreen implements Screen {
     private final int POSITION_Y_1_ROW = 300;
     private final int POSITION_Y_2_ROW = 200;
     private final int POSITION_Y_3_ROW = 100;
-    public int ecra_HalfDivision = 2;
 
-    final VelocidadeEscaldante game;
+    private final VelocidadeEscaldante game;
 
     private OrthographicCamera camera;
-    private Viewport viewport;
 
-    Assets assets;
+    private Assets assets;
 
-    boolean jumpScreen;
+    private boolean jumpScreen;
 
-    MenuButtons buttonPlay;
-    MenuButtons buttonScores;
-    MenuButtons buttonExit;
+    private MenuButtons buttonPlay;
+    private MenuButtons buttonScores;
+    private MenuButtons buttonExit;
 
-
+    /**
+     * Constructor
+     * */
     public MainMenuScreen(VelocidadeEscaldante game){
         this.game = game;
 
         this.camera = new OrthographicCamera();
-        this.viewport = new FitViewport(game.largura,game.altura);
-        this.viewport.apply();
+        Viewport viewport = new FitViewport(VelocidadeEscaldante.largura, VelocidadeEscaldante.altura);
+        viewport.apply();
         this.assets = new Assets();
 
         jumpScreen = false;
@@ -69,7 +61,7 @@ public class MainMenuScreen implements Screen {
     /**
      * Draws Top and Buttom Textures
      * */
-    public void drawTopButtomTextures(){
+    private void drawTopButtomTextures(){
         game.batch.draw(assets.TOP, 0, 400);
         game.batch.draw(assets.BUTTOM, 1, 1);
 
@@ -77,7 +69,8 @@ public class MainMenuScreen implements Screen {
     /**
      * Show and draw the first screen show to the user
      * */
-    public void renderEcraBoasVindas() {
+    private void renderEcraBoasVindas() {
+        int ecra_HalfDivision = 2;
 
         camera.update();
         game.batch.begin();
@@ -85,7 +78,7 @@ public class MainMenuScreen implements Screen {
         drawTopButtomTextures();
         game.font.setColor(Color.BLACK);
         game.font.draw(game.batch, "Welcome to Velocidade Escaldante", 200, 200);
-        game.font.draw(game.batch, " Press ENTER or Tap anywhere to begin", game.largura / ecra_HalfDivision, 180);
+        game.font.draw(game.batch, " Press ENTER or Tap anywhere to begin", VelocidadeEscaldante.largura / ecra_HalfDivision, 180);
         game.batch.end();
 
         if (Gdx.input.isTouched() || Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
@@ -95,7 +88,7 @@ public class MainMenuScreen implements Screen {
     /**
      * Shows the second screen: the menu options
      * */
-    public void renderMenuOptions(){
+    private void renderMenuOptions(){
         camera.update();
         game.batch.begin();
 
@@ -110,29 +103,29 @@ public class MainMenuScreen implements Screen {
         game.batch.end();
     }
     /**
-     * Change textures when mouse is over the exit buttom
+     * Change textures when mouse is over the exit button
      * */
-    public void visualEffectExit() {
+    private void visualEffectExit() {
         if(Gdx.input.getY() > 180 && Gdx.input.getY() < 280) {
             game.batch.draw(assets.TEXTURE_EXIT, POSITION_X, POSITION_Y_2_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
             game.batch.draw(assets.TEXTURE_PLAYINACTIVE, POSITION_X, POSITION_Y_1_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
             game.batch.draw(assets.TEXTURE_SCORESINACTIVE, POSITION_X, POSITION_Y_3_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
         }
     }
-        /**
-         * Change textures when mouse is over the scores buttom
-         * */
-    public void visualEffectScores() {
+    /**
+     * Change textures when mouse is over the scores button
+     * */
+    private void visualEffectScores() {
         if(Gdx.input.getY() > 290 && Gdx.input.getY() < 370) {
             game.batch.draw(assets.TEXTURE_SCORES,POSITION_X,POSITION_Y_3_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
             game.batch.draw(assets.TEXTURE_PLAYINACTIVE, POSITION_X, POSITION_Y_1_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
             game.batch.draw(assets.TEXTURE_EXITINACTIVE, POSITION_X, POSITION_Y_2_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
         }
     }
-        /**
-         * Change textures when mouse is over the play buttom
-         * */
-    public void visualEffectPlay(){
+    /**
+    * Change textures when mouse is over the play button
+    * */
+    private void visualEffectPlay(){
         if(Gdx.input.getY() > 70 && Gdx.input.getY() < 170) {
             game.batch.draw(assets.TEXTURE_PLAY, POSITION_X, POSITION_Y_1_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
             game.batch.draw(assets.TEXTURE_EXITINACTIVE, POSITION_X, POSITION_Y_2_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
@@ -142,7 +135,7 @@ public class MainMenuScreen implements Screen {
     /**
      * Defines action when Exit is pressed
      * */
-    public void actionOnExit(){
+    private void actionOnExit(){
         if (buttonExit.checkIfClicked(Gdx.input.getX(),Gdx.input.getY()) && Gdx.input.isTouched()) {
             assets.dispose();
             Gdx.app.exit();
@@ -151,7 +144,7 @@ public class MainMenuScreen implements Screen {
     /**
      * Defines action when Score is pressed
      * */
-    public void actionOnScore(){
+    private void actionOnScore(){
         if (buttonScores.checkIfClicked(Gdx.input.getX(),Gdx.input.getY()) && Gdx.input.isTouched()) {
             assets.dispose();
             Gdx.app.exit();
@@ -160,7 +153,7 @@ public class MainMenuScreen implements Screen {
     /**
      * Defines action when Play is pressed
      * */
-    public void actionOnPlay() {
+    private void actionOnPlay() {
         if (buttonPlay.checkIfClicked(Gdx.input.getX(),Gdx.input.getY()) && Gdx.input.isTouched()) {
             this.dispose();
             game.setScreen(new EcraJogo(game));

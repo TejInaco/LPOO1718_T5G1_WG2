@@ -20,6 +20,9 @@ public class GameOver implements Screen {
 
         private Game game;
 
+        /**
+         * Constructor GameOver is evoked when a collision happened
+         * */
         public GameOver(Game game){
             this.game = game;
             viewport = new FitViewport(VelocidadeEscaldante.largura, VelocidadeEscaldante.altura, new OrthographicCamera());

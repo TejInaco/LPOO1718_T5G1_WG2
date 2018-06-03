@@ -44,10 +44,10 @@ public class EcraJogo implements Screen {
     private Box2DDebugRenderer b2dr;
 
 
-    public  CarroControlado player;
-    public OtherCars taxi;
-    public OtherCars civil1;
-    public OtherCars civil2;
+    private  CarroControlado player;
+    private OtherCars taxi;
+    private OtherCars civil1;
+    private OtherCars civil2;
 
     private boolean gameOver =false;
     Assets assets = new Assets();
@@ -109,7 +109,7 @@ public class EcraJogo implements Screen {
         gameCamera.translate(gameCamera.viewportWidth/VelocidadeEscaldante.PPM,gameCamera.viewportHeight/VelocidadeEscaldante.PPM);
 
     }
-    public void changeLevel(){
+    private void changeLevel(){
         player.getFisica().update(game.getLevel());
     }
 
@@ -132,22 +132,22 @@ public class EcraJogo implements Screen {
         gameInformation.update(dt);
     }
     /**
-     * @returns coordinate y of the player by secren racio
+     * @return coordinate y of the player by secren racio
      * */
-    public float getCarPositionYDuringGame(){
+    private float getCarPositionYDuringGame(){
         return player.getBodyCarroControlado().getPosition().y/GAME_CAMERA_RACIO;
     }
     /**
      * Tracking the car with game camera
      * */
-    public void updateCameraPositionWithCarPosition(){
+    private void updateCameraPositionWithCarPosition(){
         gameCamera.position.y = getCarPositionYDuringGame();
     }
     /**
      * Updates HUD game information, game camera with car position and input received
      * @param dt receives a float delta time
      * */
-    public void update(float dt){
+    private void update(float dt){
 
         this.updateInformacaoDoJogo(dt);
         updateCameraPositionWithCarPosition();
@@ -155,7 +155,7 @@ public class EcraJogo implements Screen {
         renderer.setView(gameCamera);
     }
 
-    public boolean finishedLine(){
+    private boolean finishedLine(){
         return player.currentState == CarroControlado.State.FINISHING_LINE;
     }
     /**

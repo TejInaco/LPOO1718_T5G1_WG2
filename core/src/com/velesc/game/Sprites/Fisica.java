@@ -2,6 +2,7 @@ package com.velesc.game.Sprites;
 
 import com.badlogic.gdx.math.Vector2;
 
+
 public class Fisica {
     public Vector2 MAX_VELOCITY = new Vector2(0,2);
 
@@ -16,8 +17,10 @@ public class Fisica {
     public static final float FRICTION = 0.5f;
     public float actualSpeed = 0;
 
+    /**
+     * Default constructor. Class responsible for the pyshics values and forces, maximum speeds and impulses
+     * */
     public Fisica(){
-
     }
 
     public void setActualSpeed(float actualSpeed) {
@@ -27,6 +30,11 @@ public class Fisica {
     public float getActualSpeed() {
         return actualSpeed;
     }
+    /**
+     * Update MAX_VELOCITY when there was a level change in the game.
+     * The next level will increase the maximum velocity of the player
+     * @param level receives actual game level
+     * */
     public void update(int level){
         float novaVelocidade = MAX_VELOCITY.y + level;
         MAX_VELOCITY.set(0,novaVelocidade);

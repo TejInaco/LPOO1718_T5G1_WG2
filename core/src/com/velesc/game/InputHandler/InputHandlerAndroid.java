@@ -25,7 +25,10 @@ public class InputHandlerAndroid {
         if(!gyroscopeAvail)throw new IllegalArgumentException();
   //      sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
     }
-
+    /**
+     * Controlos the car with the input given by the smart phone
+     * @param player receives Object CarroControlado
+     * */
     public void updateInputAndroid(CarroControlado player){
 
         gyroX += Gdx.input.getGyroscopeX();

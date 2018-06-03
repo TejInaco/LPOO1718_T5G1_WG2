@@ -5,6 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+/**
+ * Class responsible for the creation of the Menu options
+ * */
 public class MenuButtons {
     private Sprite skin;
 
@@ -15,7 +18,7 @@ public class MenuButtons {
         skin.setSize(width, height);
     }
     /**
-     * Checks if menu label as clicked
+     * Checks if menu label was clicked
      * @param ix receives the clicked position x
      * @param iy receives the clicked position y
      *      @return true if the clicked as inside of the label, false otherwise

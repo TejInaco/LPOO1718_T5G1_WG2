@@ -25,27 +25,26 @@ public class GameInformation implements Disposable{
 
     //Time and score for the car Tracking variables
     private float timeCount = 0;
-    private int tempoContador = 0;
-    private int pontos = 0;
-    private int velocidadeCarro = 0;
+    private int tempoContador;
+    private int pontos;
+    private int velocidadeCarro;
     private final int INCREASE_POINTS_BY = 2;
     private int level = 0;
-    Table table;
+    private Table table;
     //Scene 2d widgets
 
-    Label pontosLabel;
-    Label pontos_NameLabel;
+    private Label pontosLabel;
+    private Label pontos_NameLabel;
 
-    Label tempoContador_NameLabel;
-    Label tempoContadorLabel;
+    private Label tempoContador_NameLabel;
+    private Label tempoContadorLabel;
 
-    Label velocidadeCarroLabel;
-    Label velocidadeCarro_NameLabel;
+    private Label velocidadeCarroLabel;
+    private Label velocidadeCarro_NameLabel;
 
-    Label levelLabel;
-    Label level_NameLabel;
+    private Label levelLabel;
+    private Label level_NameLabel;
 
-    public GameInformation(){}
 
     public GameInformation(SpriteBatch sb) {
         tempoContador = 0;
@@ -77,14 +76,14 @@ public class GameInformation implements Disposable{
     /**
      * Draw table on top screen
      * */
-    public void setLabelsPosition(){
+    private void setLabelsPosition(){
         this.table.top();
         this.table.setFillParent(true);
     }
     /**
      * Draw the first line with the name's label
      * */
-    public void setLabelNames(){
+    private void setLabelNames(){
         this.table.add(tempoContador_NameLabel).expandX().padTop(10);
         this.table.add(pontos_NameLabel).expandX().padTop(10);
         this.table.add(velocidadeCarro_NameLabel).expandX().padTop(10);
@@ -94,16 +93,12 @@ public class GameInformation implements Disposable{
     /**
      * Draw the second line of the table with current values
      * */
-    public void setLabelsValues(){
+    private void setLabelsValues(){
         table.row();
         table.add(tempoContadorLabel).expandX();
         table.add(pontosLabel).expandX();
         table.add(velocidadeCarroLabel).expandX();
         table.add(levelLabel).expandX();
-
-    }
-    public void setPontos(int value) {
-        pontos = value;
     }
     /**
      * Function to update the car velocity
@@ -112,19 +107,15 @@ public class GameInformation implements Disposable{
     public void setVelocidadeCarro(float value) {
         velocidadeCarro = (int) value;
     }
-
-    public int getPontos(){
-        return pontos;
-    }
-    public int getVelocidadeCarro() {
-        return velocidadeCarro;
-    }
-    public void setWorldTimer(Integer value) {
-        this.tempoContador  = value;
-    }
+    /**
+     * @param value receives the level from the game to update on the screen
+     * */
     public void setLevel(int value){
         this.level = value;
     }
+    /**
+     * Update the time counter
+     * */
     public void update(float dt){
         timeCount += dt;
         if(timeCount >= 1){

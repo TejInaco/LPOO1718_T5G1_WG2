@@ -21,13 +21,15 @@ public class OtherCars extends Enemy{
 
     private float initialPositionX;
     private float initialPositionY;
-    private float playerPositionX;
-    private float playerPostionY;
+
     Fisica fisica;
     private Texture texture;
 
     public SpriteBatch batch;
 
+    /**
+     * Construct
+     * */
     public OtherCars(EcraJogo screen, float x, float y, float velConstante, Texture texture) {
         super(screen, x, y);
         batch = new SpriteBatch();
@@ -41,11 +43,6 @@ public class OtherCars extends Enemy{
         setBounds(getX(), getY(), texture.getWidth() / VelocidadeEscaldante.PPM, texture.getHeight() / VelocidadeEscaldante.PPM);
         increment = 0;
         assets = new Assets();
-    }
-
-    public void update(float dt){
-        increment += incrementConstant;
-        this.draw();
     }
 
     @Override
@@ -67,16 +64,24 @@ public class OtherCars extends Enemy{
         b2body.setActive(true);
 
     }
+    /**
+     * @return body position in Vector 2 Format
+     * */
     public Vector2 getPosition(){
-
         return this.b2body.getPosition();
     }
-
+    /**
+     *Draws the texture in the body position
+     * */
     public void draw(){
             batch.begin();
             batch.draw(texture, initialPositionX, initialPositionY+increment,50 + texture.getWidth()/2,25 + texture.getHeight()/2);
             setPosition(initialPositionX,initialPositionY+increment);
             batch.end();
+    }
+    public void update(float dt){
+        increment += incrementConstant;
+        this.draw();
     }
 
     @Override
@@ -87,7 +92,6 @@ public class OtherCars extends Enemy{
                 return true;
         }
         return false;
-
     }
 
 }

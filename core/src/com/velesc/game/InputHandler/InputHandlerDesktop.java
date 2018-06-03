@@ -16,7 +16,10 @@ public class InputHandlerDesktop {
     public InputHandlerDesktop() {
 
     }
-
+    /**
+     * Controls the car with the user input
+     * @param player receives Object CarroControlado
+     * */
     public void updateInputDesktop(CarroControlado player){
         float vel = player.getLinearVelocity();
         Vector2 pos = player.getBodyCarroControlado().getPosition();
