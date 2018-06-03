@@ -82,9 +82,9 @@ public class OtherCars extends Enemy{
     @Override
     public boolean hitByEnemy(float posPlayerX, float posPlayerY, float largura, float altura) {
 
-        if(posPlayerX < this.getPosition().x  && posPlayerX + largura < this.getPosition().x){
-            if(posPlayerY < this.getPosition().y && posPlayerY + altura < this.getPosition().y)
-            return true;
+        if(posPlayerX > this.getPosition().x  && posPlayerX  < this.getPosition().x + largura){
+            if(posPlayerY > this.getPosition().y && posPlayerY  < this.getPosition().y+ altura)
+                return true;
         }
         return false;
 

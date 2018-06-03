@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import java.io.File;
 
 /**
- * Class to store and acess every AssetDescriptor
+ * Class to store and load every texture
  * */
 public final class Assets {
     //Main menu
@@ -30,12 +30,6 @@ public final class Assets {
     public final Texture CAR_2 = new Texture(Gdx.files.internal("android/assets/vehic_car9.png"));
     public final Texture CAR_3 = new Texture(Gdx.files.internal("android/assets/vehic_taxi0.png"));
 
-    /**
-     * vehic_car2
-     * vehic_car3
-     *
-     *
-     */
 
     public Assets(){
 

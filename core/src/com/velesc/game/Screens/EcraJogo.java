@@ -55,7 +55,6 @@ public class EcraJogo implements Screen {
 
     public EcraJogo(VelocidadeEscaldante game){
         this.game = game;
-
         this.maploader = new TmxMapLoader();
         setMapaJogo();
         this.map = assetManager.get("android/assets/roadv6.tmx");
@@ -71,23 +70,24 @@ public class EcraJogo implements Screen {
 
     //TODO Check Point
         this.taxi = new OtherCars(this, 75,600,-1, assets.CAR_3);
-        this.civil1 = new OtherCars(this,235,800,-2,assets.CAR_1);
-        this.civil2 = new OtherCars(this,380,1000, -3,assets.CAR_2);
+        this.civil1 = new OtherCars(this,235,1000,-2,assets.CAR_1);
+        this.civil2 = new OtherCars(this,380,2600, -3,assets.CAR_2);
         //allows for debug lines of our box2d world
         // x values for lines = 75 - 235 - 380
         b2dr = new Box2DDebugRenderer();
-
+        changeLevel();
     }
     public World getWorld(){
+
         return world;
     }
-    public VelocidadeEscaldante getGame(){
+    public VelocidadeEscaldante getGame() {
         return game;
     }
     /**
      * Set Game camera center position
      * */
-    public void setGameCameraPosition(){
+    private void setGameCameraPosition(){
 
         gameCamera.position.set(gamePort.getWorldWidth(),gamePort.getWorldHeight(), 0);
 
@@ -95,7 +95,7 @@ public class EcraJogo implements Screen {
     /**
      * Loads the background game for a tmx file
      * */
-    public void setMapaJogo(){
+    private void setMapaJogo(){
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
         assetManager.load("android/assets/roadv6.tmx", TiledMap.class);
@@ -104,10 +104,13 @@ public class EcraJogo implements Screen {
     /**
      * Create cam used to follow the car through  world
      * */
-    public void setCameraCarro(){
+    private void setCameraCarro(){
         gameCamera = new OrthographicCamera(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
         gameCamera.translate(gameCamera.viewportWidth/VelocidadeEscaldante.PPM,gameCamera.viewportHeight/VelocidadeEscaldante.PPM);
 
+    }
+    public void changeLevel(){
+        player.getFisica().update(game.getLevel());
     }
 
     @Override
@@ -119,10 +122,12 @@ public class EcraJogo implements Screen {
      * Updates Velocity, points and time in the game information area
      * @param dt recives a float delta time
      * */
-    public void updateInformacaoDoJogo(float dt){
-        //this.gameInformation.setWorldTimer(player.carroPositionY());
-        gameInformation.setVelocidadeCarro(player.carroPositionY());
-        gameInformation.addPontos(player.carroPositionX());
+    private void updateInformacaoDoJogo(float dt){
+        float playervelocity = player.getSpeedKMH();
+
+        gameInformation.setVelocidadeCarro(playervelocity);
+        gameInformation.addPontos(playervelocity, player.getFisica().MAX_VELOCITY);
+        gameInformation.setLevel(game.getLevel());
         gameInformation.updateLabels();
         gameInformation.update(dt);
     }
@@ -143,6 +148,7 @@ public class EcraJogo implements Screen {
      * @param dt receives a float delta time
      * */
     public void update(float dt){
+
         this.updateInformacaoDoJogo(dt);
         updateCameraPositionWithCarPosition();
         gameCamera.update();
@@ -150,10 +156,7 @@ public class EcraJogo implements Screen {
     }
 
     public boolean finishedLine(){
-        if(player.currentState == CarroControlado.State.FINISHING_LINE ){
-            return true;
-        }
-        return false;
+        return player.currentState == CarroControlado.State.FINISHING_LINE;
     }
     /**
      * //TODO check fuction collisions
@@ -162,7 +165,7 @@ public class EcraJogo implements Screen {
         if(taxi.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ||
             civil1.hitByEnemy(posPlayerX, posPlayerY,  largura, altura)  ||
             civil2.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ){
-                gameOver = false;
+                gameOver = true;
         }
     }
 
@@ -174,7 +177,8 @@ public class EcraJogo implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         renderer.render();
-        checkCollisions(player.getPosition().x, player.getPosition().y,
+        checkCollisions(player.getBodyCarroControlado().getPosition().x,
+                player.getBodyCarroControlado().getPosition().y,
                 50 + assets.CAMARO.getWidth()/2,25 + assets.CAMARO.getHeight()/2);
 
         //renderer our Box2DDebugLines
@@ -197,13 +201,13 @@ public class EcraJogo implements Screen {
             dispose();
         }
         if(finishedLine()){
-            game.setScreen(new EcraJogo(game));
-            //TODO increase maximum speed
+            game.setLevel();
+            game.setScreen(new Finished(game));
         }
     }
 
     @Override
-    public void resize(int width, int height){
+    public void resize(int width, int height) {
         gamePort.update(width,height);
     }
 

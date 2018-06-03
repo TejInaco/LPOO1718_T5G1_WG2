@@ -36,9 +36,8 @@ public class InputHandlerDesktop {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             player.getBodyCarroControlado().applyForceToCenter(0,player.getFisica().RISE_SPEED_BACKWARDS,false);
-//TODO condicao para o stop totalmente
-           if(player.getBodyCarroControlado().getLinearVelocity().isZero()){
-               player.getBodyCarroControlado().getLinearVelocity().setZero();
+           if(player.getCurrentState() == CarroControlado.State.STOP){
+               player.setVelocityToZero();
            }
         }
     }

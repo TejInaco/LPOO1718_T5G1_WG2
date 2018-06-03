@@ -13,7 +13,7 @@ import com.velesc.game.VelocidadeEscaldante;
 import com.badlogic.gdx.graphics.Texture;
 
 public class CarroControlado extends Sprite {
-    public enum State { STOP, DRIVING, COLLISION,  FINISHING_LINE };
+    public enum State { STOP, DRIVING,  FINISHING_LINE };
     public State currentState;
     //public State previousState;
     private static int MAP_LEFT_LIMITS = 5;
@@ -36,7 +36,6 @@ public class CarroControlado extends Sprite {
 
 
     public CarroControlado(EcraJogo screen){
-//        super(world, boundsX, boundsY, sprite_largura, sprite_altura);
         this.screen = screen;
         this.world = screen.getWorld();
         batch = new SpriteBatch();
@@ -73,10 +72,10 @@ public class CarroControlado extends Sprite {
     public int carroPositionX(){
         return (int) ( this.getBodyCarroControlado().getPosition().x/VelocidadeEscaldante.PPM);
     }
-    public Fisica getFisica(){
+    public Fisica getFisica() {
         return fisica;
     }
-    public Body getBodyCarroControlado(){
+    public Body getBodyCarroControlado() {
         return body;
     }
     public float getLinearVelocity(){
@@ -85,7 +84,16 @@ public class CarroControlado extends Sprite {
     public Vector2 getPosition(){
         return this.body.getPosition();
     }
-    /*
+    public void setVelocityToZero(){
+        if(getSpeedKMH() <= 0){
+            this.currentState = State.STOP;
+            this.getBodyCarroControlado().setLinearVelocity(0,0);
+        }
+    }
+    public State getCurrentState(){
+        return currentState;
+    }
+    /**
     * returns car's velocity vector relative to the car
     */
     public Vector2 getLocalVelocity() {
@@ -96,9 +104,8 @@ public class CarroControlado extends Sprite {
      * @returns The car velocity em Kmh
      * */
     public float getSpeedKMH(){
-        Vector2 velocity=this.body.getLinearVelocity();
-        float len = velocity.len();
-        return (len/1000)*3600;
+        Vector2 velocity= this.body.getLinearVelocity();
+        return (velocity.y/100)*3600;
     }
     /**
      * Maintains Linear Velocity of the car only on the Y axis
@@ -129,6 +136,7 @@ public class CarroControlado extends Sprite {
     public void checkBoundaries(){
         boundariesLeft();
         boundariesRight();
+        setVelocityToZero();
     }
     /**
      * Checks if the car is beyond the left limits

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -27,15 +28,22 @@ public class GameInformation implements Disposable{
     private int tempoContador = 0;
     private int pontos = 0;
     private int velocidadeCarro = 0;
-
+    private final int INCREASE_POINTS_BY = 2;
+    private int level = 0;
     Table table;
     //Scene 2d widgets
-    Label tempoContadorLabel;
+
     Label pontosLabel;
-    Label velocidadeCarroLabel;
-    Label tempoContador_NameLabel;
     Label pontos_NameLabel;
+
+    Label tempoContador_NameLabel;
+    Label tempoContadorLabel;
+
+    Label velocidadeCarroLabel;
     Label velocidadeCarro_NameLabel;
+
+    Label levelLabel;
+    Label level_NameLabel;
 
     public GameInformation(){}
 
@@ -53,10 +61,14 @@ public class GameInformation implements Disposable{
         tempoContadorLabel = new Label(String.format("%03d",tempoContador),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         pontosLabel = new Label(String.format("%06d",pontos),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         velocidadeCarroLabel = new Label(String.format("%03d", velocidadeCarro),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        levelLabel = new Label(String.format("%02d", level),new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         tempoContador_NameLabel = new Label("T E M P O",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         pontos_NameLabel = new Label("P O N T O S",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
         velocidadeCarro_NameLabel = new Label("Velocidade",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+        level_NameLabel = new Label("Level",new Label.LabelStyle(new BitmapFont(), Color.WHITE));
+
 
         setLabelNames();
         setLabelsValues();
@@ -76,6 +88,7 @@ public class GameInformation implements Disposable{
         this.table.add(tempoContador_NameLabel).expandX().padTop(10);
         this.table.add(pontos_NameLabel).expandX().padTop(10);
         this.table.add(velocidadeCarro_NameLabel).expandX().padTop(10);
+        this.table.add(level_NameLabel).expandX().padTop(10);
 
     }
     /**
@@ -86,6 +99,7 @@ public class GameInformation implements Disposable{
         table.add(tempoContadorLabel).expandX();
         table.add(pontosLabel).expandX();
         table.add(velocidadeCarroLabel).expandX();
+        table.add(levelLabel).expandX();
 
     }
     public void setPontos(int value) {
@@ -95,20 +109,22 @@ public class GameInformation implements Disposable{
      * Function to update the car velocity
      * @param value Actual velocity of the car
      * */
-    public void setVelocidadeCarro(int value){
-        velocidadeCarro = value;
+    public void setVelocidadeCarro(float value) {
+        velocidadeCarro = (int) value;
     }
 
     public int getPontos(){
         return pontos;
     }
-    public int getVelocidadeCarro(){
+    public int getVelocidadeCarro() {
         return velocidadeCarro;
     }
-    public void setWorldTimer(Integer value){
+    public void setWorldTimer(Integer value) {
         this.tempoContador  = value;
     }
-
+    public void setLevel(int value){
+        this.level = value;
+    }
     public void update(float dt){
         timeCount += dt;
         if(timeCount >= 1){
@@ -120,9 +136,10 @@ public class GameInformation implements Disposable{
      * Function to increase the number of points obtained
      * @param value Number of points to add
      * */
-    public void addPontos(int value) {
-        this.pontos = value;
-        //Debuggin reasons change to pontos += value;
+    public void addPontos(float value, Vector2 maximum) {
+        if(value >= maximum.y) {
+            this.pontos += INCREASE_POINTS_BY;
+        }
     }
 
     @Override
@@ -136,21 +153,7 @@ public class GameInformation implements Disposable{
         pontosLabel.setText(String.format("%06d",pontos));
         velocidadeCarroLabel.setText(String.format("%03d", velocidadeCarro));
         tempoContadorLabel.setText(String.format("%03d",tempoContador));
-    }
-//    /**
-//     * Sets and Gets
-//     * */
-//    public void setTimeCount(){
-//        timeCount = 0;
-//    }
-//    public void setTempoContador(int value){
-//        tempoContador = value;
-//    }
-public float getTimeCount(){
-    return timeCount;
-}
-    public int getTempoContador(){
-        return tempoContador;
+        levelLabel.setText(String.format("%03d",level));
     }
 
 }

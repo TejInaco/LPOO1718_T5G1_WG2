@@ -17,6 +17,7 @@ public class VelocidadeEscaldante extends Game {
     public static final float PPM = 16; //Pixels per meter
 
     private static boolean IS_MOBILE = false;
+    private int level = 1;
     //images in textures
     public SpriteBatch batch;
     public BitmapFont font;
@@ -34,12 +35,20 @@ public class VelocidadeEscaldante extends Game {
         // EcraJogo
         this.setScreen(new MainMenuScreen(this));
     }
-    public boolean getIsMobile(){
+    public void setLevel(){
+        level += 1;
+    }
+    public int getLevel(){
+        return level;
+    }
+
+    public boolean getIsMobile()
+    {
         return IS_MOBILE;
     }
 
 	@Override
-	public void render(){
+	public void render() {
         super.render();
 	}
 	@Override
