@@ -90,20 +90,21 @@ Esperamos implentar o MVC com a seguinte estruturação:
   
   ## User Manual
   
-  Ao iniciar o jogo é visualizado o ecrã de boas-vidas
+  Ao iniciar o jogo é visualizado o ecrã de boas-vindas:
+  
   ![Ecra de Boas Vindas](firstScreen.png)
   
-  Pressionar enter our clickar no rato, e será visualizado o Menu de opções
+  Pressionar "enter" ou "clickar" no rato, e será visualizado o Menu de opções:
   
   ![Menu](SecondScreen.png)
   
-  Existem três opções: Play, Exit e Scores, se click no play iniciaremos o jogo e se no exit encerrá o jogo. Os scores mostraram as útlimas pontuações activas.
-  Se a opção do user for o play, iniciará o jogo mostrando a seguinte imagem
+  Existem três opções: Play, Exit e Scores.No play iniciaremos o jogo, e no exit encerrá a aplicação. Os scores mostram as últimas pontuações activas.
+  No caso de user seleccionar Play, iniciará o jogo mostrando a seguinte imagem:
   
   ![Menu](gameScreen.png)
   
-  O user terá controlo do carro apresentado no canto inferior esquerdo. O controlo será feito exclusivamente com as setas UP, para aumentar a velocidade até a um limite máximo, o LEFT para o carro se deslocar para a esquerda, o RIGHT para o carro se deslocar para a direita, e o DOWN para travar e parar o carro completamente.
-  O objectivo será completar o troço da estrada o mais rápido possível evitando colisões com outros carros que aparecerão na estrada. Caso haja colisão o jogo acabará em Game Over.
+  O user terá controlo do carro apresentado no canto inferior esquerdo. O controlo será feito exclusivamente com as setas UP, para aumentar a velocidade até a um limite máximo de velocidade, o LEFT para o carro se deslocar para a esquerda, o RIGHT para o carro se deslocar para a direita, e o DOWN para travar e parar o carro completamente.
+  O objectivo será completar o troço da estrada o mais rápido possível evitando colisões com outros carros que aparecerão na estrada. Caso haja colisão o jogo acabará em Game Over. Em cada nível, a velocidade máxima aumentará tornando todo o jogo mais rápido.
   
   ## Test Design
   
