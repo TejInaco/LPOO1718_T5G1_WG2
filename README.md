@@ -1,10 +1,4 @@
-@finalRelease
 
-Platform -specific executable files
--Java for multiple platforms
--Apk for Android
-
-javadoc documentation files
 ## User Manual
   
   Ao iniciar o jogo é visualizado o ecrã de boas-vindas:
@@ -70,8 +64,7 @@ Em continuação da ideia anterior do Update Method, o Design Pattern foi utiliz
  
 ### Work distribution
 
-Numa fase inicial, do desenvolvimento da ideia e e da implementação das primeiras linhas de código, a distribuição de trabalho foi feita do modo pair programming. Na fase intermédia e final, ambos fomos decidindo e resolvendo os bugs de forma prioritária.
-Portanto, consideramos a distribuição do trabalho igualitária entre os membros. 
+Consideramos a distribuição do trabalho igualitária entre os membros. 
 
 ### Major Difficulties
 
@@ -85,4 +78,4 @@ Na fase final, deparamo-nos com a diferença de leitura de ficheiros entre o uso
 Na fase final deste projecto, consideramos o nosso tema ser demasiado ambicioso tendo em conta que desconheciamos completamente a framework que iriamos utilizar. Chegámos a conclusão que provavelmente deveríamos ter escolhido um tema mais simples e mais usual para uma primeira implementação, em vez de optar pela originalidade. Definitivamente, a lição apreendida é a de que é essencial um bom dominio da ferramenta para chegar a um bom resultado.
 
 ### Overrall time spent developing 
-Tendo em conta que só nas aulas práticas equivalem a 24 horas dispendidas para o desenvolvimento do jogo, fora deste período estimamos cerca de 10-11 horas por semana e por cada elemento do grupo, o que totaliza cerca de 180 horas dispendidas neste projecto.
+Tendo em conta que só nas aulas práticas equivalem a 24 horas dispendidas para o desenvolvimento do jogo, fora deste período estimamos cerca de 10-11 horas por semana e por cada elemento do grupo, o que totaliza cerca de 220 horas dispendidas neste projecto.
