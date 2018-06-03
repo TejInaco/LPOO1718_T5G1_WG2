@@ -5,9 +5,6 @@ Platform -specific executable files
 -Apk for Android
 
 javadoc documentation files
-
-Content in read.me
-
 Setup installation procedure
 -> how to install de developemeetn enviroment
 -> how to install/run the game/app
@@ -17,38 +14,6 @@ Diagrama de classes
 Diagrama de Estados
 (rascunho feito)
 Diagrama de Sequências
-
-
-
-
-Design decisions
-
-Principais Dificuldades:
-
-As principais dificuldades centram em 3 pontos essencias: pouco espaço temporal para compreensão da framework libgdx, uso e o processamento do tiled maps e dos seus objectos que nos levou a reconsiderar outros caminhos de implementação, e por último, a implementação de testes
-
-Lições apreendidas:
-
-overrall time spent developing 
-work distribution
-
-Distribuição igualitária entre os membros do grupo
-
-User manual with screen shotts - how to play /use the game
-
-Ao incializar o jogo é apresentado o ecrã de boas vindas.
-Pressionar qualquer tecla para passar ao menu
-Seleccionar com o mouse Play, Exit ou Scores
-Utilizar as setas para controlar o carro
-
-
-
-
-
-
-
-
-
 
 ## Architecture Design
 
@@ -67,8 +32,6 @@ Utilizar as setas para controlar o carro
 
 
  ##  Design Patterns usados
- ### Singleton
- A classe VelocidadeEscaldante é a classe com uma única instanciação
  
  ### Flyweight
  Tendo em conta o uso de texturas no jogo, e sendo que muitas das  texturas são reusadas em diferentes locais, o Design Pattern FLyweight é implementado através da nossa classe Assets, que tem como resposabilidade o load das texturas usadas no jogo e o seu dispose(). 
@@ -110,6 +73,25 @@ Em continuação da ideia anterior do Update Method, o Design Pattern foi utiliz
   O user terá controlo do carro apresentado no canto inferior esquerdo. O controlo será feito exclusivamente com as setas UP, para aumentar a velocidade até a um limite máximo de velocidade, o LEFT para o carro se deslocar para a esquerda, o RIGHT para o carro se deslocar para a direita, e o DOWN para travar e parar o carro completamente.
   O objectivo será completar o troço da estrada o mais rápido possível evitando colisões com outros carros que aparecerão na estrada. Caso haja colisão o jogo acabará em Game Over. Em cada nível, a velocidade máxima aumentará tornando todo o jogo mais rápido.
   
-  ## Test Design
+  ## Junit Test Cases
   
+  Apesar de termos recorrido  a diversos links fomos infrutíferos na implementação dos testes unitários.
+  Na nossa tentativa, seguimos as recomendações deste reposítório:
+  https://github.com/TomGrill/gdx-testing
+  
+  como também tentamos mudar as configurações sugeridas nestas webpages:
+  http://manabreak.eu/java/2016/10/21/unittesting-libgdx.html
+  https://staticdot.com/howto/junit-libgdx
  
+## Work distribution
+
+Numa fase inicial, do desenvolvimento da ideia e e da implementação das primeiras linhas de código, a distribuição de trabalho foi feita do modo pair programming. Na fase intermédia e final, ambos fomos decidindo e resolvendo os bugs de forma prioritária.
+Portanto, consideramos a distribuição do trabalho igualitária entre os membros. 
+
+## Major Difficulties
+
+## Lessons Learned
+
+## Overrall time spent developing 
+
+## Design decisions
