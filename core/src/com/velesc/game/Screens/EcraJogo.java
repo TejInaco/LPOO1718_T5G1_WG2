@@ -68,12 +68,12 @@ public class EcraJogo implements Screen {
         this.world = new World(new Vector2(0,0),true);
         this.player = new CarroControlado(this);
 
-    //TODO Check Point
-        this.taxi = new OtherCars(this, 75,600,-1, assets.CAR_3);
+
+        this.taxi = new OtherCars(this, 75,1000,-1, assets.CAR_3);
         this.civil1 = new OtherCars(this,235,1000,-2,assets.CAR_1);
         this.civil2 = new OtherCars(this,380,2600, -3,assets.CAR_2);
+
         //allows for debug lines of our box2d world
-        // x values for lines = 75 - 235 - 380
         b2dr = new Box2DDebugRenderer();
         changeLevel();
     }

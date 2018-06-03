@@ -126,11 +126,10 @@ public class MainMenuScreen implements Screen {
     * Change textures when mouse is over the play button
     * */
     private void visualEffectPlay(){
-        if(Gdx.input.getY() > 70 && Gdx.input.getY() < 170) {
             game.batch.draw(assets.TEXTURE_PLAY, POSITION_X, POSITION_Y_1_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
-            game.batch.draw(assets.TEXTURE_EXITINACTIVE, POSITION_X, POSITION_Y_2_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
-            game.batch.draw(assets.TEXTURE_SCORESINACTIVE, POSITION_X, POSITION_Y_3_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
-        }
+            game.batch.draw(assets.TEXTURE_EXIT, POSITION_X, POSITION_Y_2_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
+            game.batch.draw(assets.TEXTURE_SCORES, POSITION_X, POSITION_Y_3_ROW, BUTTONS_WIDTH, BUTTONS_HEIGHT);
+
     }
     /**
      * Defines action when Exit is pressed
