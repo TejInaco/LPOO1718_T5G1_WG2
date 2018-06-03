@@ -1,4 +1,4 @@
-## RUN THE APP
+## RUN THE APP ON DESKTOP
 
 Para correr a aplicação basta fazer o download do repositório.
 Navegar até
