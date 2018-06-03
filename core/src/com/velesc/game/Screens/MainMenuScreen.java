@@ -1,8 +1,12 @@
 package com.velesc.game.Screens;
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.velesc.game.Assets;
@@ -11,7 +15,10 @@ import com.velesc.game.VelocidadeEscaldante;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 
-public class MainMenuScreen implements Screen {
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class MainMenuScreen implements Screen{
     private static final int  BUTTONS_WIDTH = 300;
     private static final int  BUTTONS_HEIGHT = 75;
     private final int POSITION_X = 50;
@@ -26,15 +33,16 @@ public class MainMenuScreen implements Screen {
     private Assets assets;
 
     private boolean jumpScreen;
-
     private MenuButtons buttonPlay;
     private MenuButtons buttonScores;
     private MenuButtons buttonExit;
 
+    private Stage stage;
+    private Table table;
     /**
      * Constructor
      * */
-    public MainMenuScreen(VelocidadeEscaldante game){
+    public MainMenuScreen(VelocidadeEscaldante game) {
         this.game = game;
 
         this.camera = new OrthographicCamera();
@@ -157,6 +165,8 @@ public class MainMenuScreen implements Screen {
             this.dispose();
             game.setScreen(new EcraJogo(game));
         }
+
+
     }
 
     @Override

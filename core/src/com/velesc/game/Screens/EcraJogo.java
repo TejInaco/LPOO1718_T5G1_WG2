@@ -55,7 +55,7 @@ public class EcraJogo implements Screen {
         this.game = game;
         this.maploader = new TmxMapLoader();
         setMapaJogo();
-        this.map = assetManager.get("android/assets/roadv6.tmx");
+        this.map = assetManager.get("roadv6.tmx");
         setCameraCarro();
         //Create FitViewPort to maintain virtual aspect ratio despite screen
         this.gamePort = new FitViewport(VelocidadeEscaldante.largura /VelocidadeEscaldante.PPM, VelocidadeEscaldante.altura /VelocidadeEscaldante.PPM , gameCamera);
@@ -96,7 +96,7 @@ public class EcraJogo implements Screen {
     private void setMapaJogo(){
         assetManager = new AssetManager();
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-        assetManager.load("android/assets/roadv6.tmx", TiledMap.class);
+        assetManager.load("roadv6.tmx", TiledMap.class);
         assetManager.finishLoading();
     }
     /**

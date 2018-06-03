@@ -5,10 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 /**
  * Class responsible for the creation of the Menu options
  * */
-public class MenuButtons {
+public class MenuButtons implements ActionListener {
     private Sprite skin;
 
 
@@ -16,6 +19,9 @@ public class MenuButtons {
         skin = new Sprite(texture);
         skin.setPosition(x, y);
         skin.setSize(width, height);
+    }
+    public Sprite getSkin(){
+        return skin;
     }
     /**
      * Checks if menu label was clicked
@@ -32,5 +38,9 @@ public class MenuButtons {
         return false;
     }
 
+    @Override
+    public void actionPerformed(ActionEvent actionEvent) {
+
+    }
 }
 

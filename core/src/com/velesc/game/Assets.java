@@ -13,22 +13,22 @@ import java.io.File;
  * */
 public final class Assets {
     //Main menu
-    public final Texture TEXTURE_PLAY = new Texture(Gdx.files.internal("android/assets/play.png"));
-    public final Texture TEXTURE_EXIT = new Texture(Gdx.files.internal("android/assets/exit.png"));
-    public final Texture TEXTURE_SCORES = new Texture(Gdx.files.internal("android/assets/Highscores.png"));
-    public final Texture TEXTURE_PLAYINACTIVE = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
-    public final Texture TEXTURE_EXITINACTIVE = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
-    public final Texture TEXTURE_SCORESINACTIVE = new Texture(Gdx.files.internal("android/assets/flame_barrier.png"));
+    public final Texture TEXTURE_PLAY = new Texture("play.png");
+    public final Texture TEXTURE_EXIT = new Texture("exit.png");
+    public final Texture TEXTURE_SCORES = new Texture("Highscores.png");
+    public final Texture TEXTURE_PLAYINACTIVE = new Texture("flame_barrier.png");
+    public final Texture TEXTURE_EXITINACTIVE = new Texture("flame_barrier.png");
+    public final Texture TEXTURE_SCORESINACTIVE = new Texture("flame_barrier.png");
     //Ecra inicial
-    public final Texture BACKGROUND = new Texture(Gdx.files.internal("android/assets/logo.png"));
-    public final Texture TOP = new Texture(Gdx.files.internal("android/assets/Velocidade.png"));
-    public final Texture BUTTOM = new Texture(Gdx.files.internal("android/assets/Escaldante.png"));
-    public final Texture CAMARO = new Texture(Gdx.files.internal("android/assets/camaro.png"));
+    public final Texture BACKGROUND = new Texture("logo.png");
+    public final Texture TOP = new Texture("Velocidade.png");
+    public final Texture BUTTOM = new Texture("Escaldante.png");
+    public final Texture CAMARO = new Texture("camaro.png");
     //Cars on the road
-    public final Texture CAR_0 = new Texture(Gdx.files.internal("android/assets/vehic_car0.png"));
-    public final Texture CAR_1 = new Texture(Gdx.files.internal("android/assets/vehic_car8.png"));
-    public final Texture CAR_2 = new Texture(Gdx.files.internal("android/assets/vehic_car9.png"));
-    public final Texture CAR_3 = new Texture(Gdx.files.internal("android/assets/vehic_taxi0.png"));
+    public final Texture CAR_0 = new Texture("vehic_car0.png");
+    public final Texture CAR_1 = new Texture("vehic_car8.png");
+    public final Texture CAR_2 = new Texture("vehic_car9.png");
+    public final Texture CAR_3 = new Texture("vehic_taxi0.png");
 
 
     public Assets(){
