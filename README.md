@@ -88,6 +88,23 @@ Esperamos implentar o MVC com a seguinte estruturação:
   
   Foi utilizado o sofware Tiled para gerar o mapa do jogo e os objectos estáticos dentro do mapa.
   
+  ## User Manual
+  
+  Ao iniciar o jogo é visualizado o ecrã de boas-vidas
+  ![Ecra de Boas Vindas](firstScreen.png)
+  
+  Pressionar enter our clickar no rato, e será visualizado o Menu de opções
+  
+  ![Menu](SecondScreen.png)
+  
+  Existem três opções: Play, Exit e Scores, se click no play iniciaremos o jogo e se no exit encerrá o jogo. Os scores mostraram as útlimas pontuações activas.
+  Se a opção do user for o play, iniciará o jogo mostrando a seguinte imagem
+  
+  ![Menu](gameScreen.png)
+  
+  O user terá controlo do carro apresentado no canto inferior esquerdo. O controlo será feito exclusivamente com as setas UP, para aumentar a velocidade até a um limite máximo, o LEFT para o carro se deslocar para a esquerda, o RIGHT para o carro se deslocar para a direita, e o DOWN para travar e parar o carro completamente.
+  O objectivo será completar o troço da estrada o mais rápido possível evitando colisões com outros carros que aparecerão na estrada. Caso haja colisão o jogo acabará em Game Over.
+  
   ## Test Design
   
   ### Test cases
