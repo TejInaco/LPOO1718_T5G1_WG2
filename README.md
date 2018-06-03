@@ -1,3 +1,15 @@
+## RUN THE APP
+
+Para correr a aplicação basta fazer o download do repositório.
+Navegar até
+
+~/LPOO1718_T5G1_WG2/desktop/build/libs
+
+E executar o comando:
+
+java -jar desktop-1.0.jar
+
+
 
 ## User Manual
   
