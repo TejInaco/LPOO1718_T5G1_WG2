@@ -1,3 +1,7 @@
+## Java Documentation
+
+Documentação pode ser encontrada sobre a pasta __docs__
+
 ## RUN THE APP ON DESKTOP (Linux)
 
 Para correr a aplicação basta fazer o download do repositório.
