@@ -66,7 +66,7 @@ Utilizar as setas para controlar o carro
   ![State Machine](stateMachine.png)
 
 
- ###  Design Patterns usados
+ ##  Design Patterns usados
  ### Singleton
  A classe VelocidadeEscaldante é a classe com uma única instanciação
  
@@ -112,31 +112,4 @@ Em continuação da ideia anterior do Update Method, o Design Pattern foi utiliz
   
   ## Test Design
   
-  ### Test cases
-  1) [android] inclinação do ecrã para a direita, o carro vira para a direita
-  2) [android] inclinação do ecrã para a esquerda, o carro vira para a esquerda
-  3) Teste dos inputs das teclas para modificação da velocidade e direcção do carro
-  4) Se colisao com outro veiculo tira pontos
-  5) Se colisao entre player 1 e player 2 nao tira pontos mas tem efeitos fisicos
-  6) Se frente/trás altera velocidade como deve
-  7) Se atropelar diminui vidas.
-  8) Se atingir caes ou gator diminui pontos
-  9) Se bonus de vidas/pontos produz o efeito desejado
-  10) Se colisao acusa
-  11) Se escolha no menu altera para menu certo
-  12) Se escolha do modo altera o modo
-  13) Se lombas com velocidade em excesso diminui a mesma e se tira pontos e se faz vibrar no Android
-  14) [multiplayer] Se multiplayer preenche ambas estruturas e cada um no certo
-  15) Se sem pisca não vira mas vira com pisca e só para esse lado
-  16) Se passadeiras, peoes e animais aleatorios na aparicao
-  17) Se pisca faz mudar sprite para ver-se a piscar (no lado correcto)
-  18) Se pontos maiores que guardados sao guardados e so esses
-  19) [multiplayer] Se por um morrer o outro nao acaba
-  20) Se velocidade nao desce abaixo de zero e se quando zero => parado e nao vira
-  21) Se velocidade nao ultrapassa limite na macro
-  22) Se veiculos alheios variam aleatoriamente
-  23) Se vidas = 0 => gameover
-  24) Se vira direita e esquerda mas sem ultrapassar bermas nem passar obstaculos
-  25) Se vira só com pisca 
-  26) Se muda estado para o estado correcto com eventos de mudança de estado
-  27) Se inputs espoletam os eventos desejados
+ 
