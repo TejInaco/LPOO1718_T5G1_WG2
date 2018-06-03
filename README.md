@@ -19,13 +19,7 @@ Diagrama de Estados
 Diagrama de Sequências
 
 
-Design Patterns usadas:
 
-»Singleton: A classe VelocidadeEscaldante é a classe com uma única instanciação
-»Flyweight: tendo em conta o uso de texturas no jogo, e sendo que muitas das  texturas são reusadas em diferentes locais, o Design Pattern FLyweight é implementado através da nossa classe Assets, que tem como resposabilidade o load das texturas usadas no jogo e o seu dispose().
-»Update Method: Na maior parte dos objectos implementa-se o método update(delta) para simular um frame do comportamento do objecto. A ideia consiste no jogo fazer o update() em toda a rede de objectos.
-»Component
-Em continuação da ideia anterior do Update Method, o Design Pattern foi utilizado na class CarroControlado em que foi definida uma classe InputHandler, para controlo do CarroControlado quer para Desktop quer para Android, uma classe Fisica, para efectuar os cálculos comportamentais
 
 Design decisions
 
@@ -72,11 +66,21 @@ Utilizar as setas para controlar o carro
   ![State Machine](stateMachine.png)
 
 
-  #### Expected Design Patterns 
-Esperamos implentar o MVC com a seguinte estruturação:
+  ####  Design Patterns usados
+ ## Singleton
+ A classe VelocidadeEscaldante é a classe com uma única instanciação
+ 
+ ## Flyweight
+ Tendo em conta o uso de texturas no jogo, e sendo que muitas das  texturas são reusadas em diferentes locais, o Design Pattern FLyweight é implementado através da nossa classe Assets, que tem como resposabilidade o load das texturas usadas no jogo e o seu dispose(). 
+ Na implementação da classe Física para o comportamento dos objectos também recorremosao flyweight, pois a maior parte das variáveis, como por exemplo, fricção, restituição, densidade, velocidade máxima e forças são partilhadas por diversos objectos.
+ 
+## Update Method
+Na maior parte dos objectos implementa-se o método update(delta) para simular um frame do comportamento de objectos independentes. A ideia consiste no jogo fazer o update() em toda a rede de objectos.
 
- ![MVC](mvc.png)
+## Component
+Em continuação da ideia anterior do Update Method, o Design Pattern foi utilizado na class CarroControlado em que foi definida uma classe InputHandler, para controlo do CarroControlado quer para Desktop quer para Android.
 
+ 
 ## GUI Design
 
    ### Main functionalities
