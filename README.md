@@ -5,15 +5,6 @@ Platform -specific executable files
 -Apk for Android
 
 javadoc documentation files
-Setup installation procedure
--> how to install de developemeetn enviroment
--> how to install/run the game/app
-Updated UML diagrams
-Diagrama de classes
-(rascunho feito)
-Diagrama de Estados
-(rascunho feito)
-Diagrama de Sequências
 ## User Manual
   
   Ao iniciar o jogo é visualizado o ecrã de boas-vindas:
@@ -68,10 +59,13 @@ Em continuação da ideia anterior do Update Method, o Design Pattern foi utiliz
   
   Apesar de termos recorrido  a diversos links fomos infrutíferos na implementação dos testes unitários.
   Na nossa tentativa, seguimos as recomendações deste reposítório:
+  
   https://github.com/TomGrill/gdx-testing
   
   como também tentamos mudar as configurações sugeridas nestas webpages:
+  
   http://manabreak.eu/java/2016/10/21/unittesting-libgdx.html
+  
   https://staticdot.com/howto/junit-libgdx
  
 ### Work distribution
