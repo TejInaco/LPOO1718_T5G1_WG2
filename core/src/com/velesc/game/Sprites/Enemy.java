@@ -12,8 +12,8 @@ abstract class Enemy extends Sprite {
     protected World world;
     protected EcraJogo screen;
 
-    public Body b2body;
-    public Vector2 velocity;
+    protected Body b2body;
+    protected Vector2 velocity;
 
     public Enemy(EcraJogo screen, float x, float y){
         this.world = screen.getWorld();

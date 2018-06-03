@@ -18,15 +18,20 @@ public class Fisica {
     public float actualSpeed = 0;
 
     /**
-     * Default constructor. Class responsible for the pyshics values and forces, maximum speeds and impulses
+     * Default constructor. Class responsible for the physics values and forces, maximum speeds and impulses
      * */
     public Fisica(){
     }
-
+    /**
+     * Set the car speed hold variable
+     * @param actualSpeed
+     * */
     public void setActualSpeed(float actualSpeed) {
         this.actualSpeed = actualSpeed;
     }
-
+    /**
+     * @return car speed
+     * */
     public float getActualSpeed() {
         return actualSpeed;
     }

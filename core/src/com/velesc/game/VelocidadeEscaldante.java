@@ -35,13 +35,21 @@ public class VelocidadeEscaldante extends Game {
         // EcraJogo
         this.setScreen(new MainMenuScreen(this));
     }
+    /**
+     * Increase Level
+     * */
     public void setLevel(){
         level += 1;
     }
+    /**
+     * @return returns level number
+     * */
     public int getLevel(){
         return level;
     }
-
+    /**
+     * @return true if app is running in smart phone false otherwise
+     * */
     public boolean getIsMobile()
     {
         return IS_MOBILE;

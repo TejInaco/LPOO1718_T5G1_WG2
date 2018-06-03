@@ -19,13 +19,13 @@ public class CarroControlado extends Sprite {
     private int initialPositionX = 50;
     private int initialPositionY = 50;
 
-    public World world;
-    public Body body;
+    private World world;
+    private Body body;
     private EcraJogo screen;
 
-    public SpriteBatch batch;
+    private SpriteBatch batch;
 
-    Assets assets;
+    private Assets assets;
 
     private Fisica fisica;
 
@@ -58,17 +58,11 @@ public class CarroControlado extends Sprite {
         PolygonShape shape = new PolygonShape();
         shape.setAsBox(assets.CAMARO.getWidth()/VelocidadeEscaldante.PPM, assets.CAMARO.getHeight()/VelocidadeEscaldante.PPM);
         fdef.shape = shape;
-        fdef.density = fisica.DENSITY;
+        fdef.density = Fisica.DENSITY;
         fdef.restitution = Fisica.RESTITUTION;
-        fdef.friction = fisica.FRICTION;
+        fdef.friction = Fisica.FRICTION;
         body.createFixture(fdef).setUserData(this);
 
-    }
-    public int carroPositionY() {
-        return (int) this.getBodyCarroControlado().getPosition().y;
-    }
-    public int carroPositionX(){
-        return (int) ( this.getBodyCarroControlado().getPosition().x/VelocidadeEscaldante.PPM);
     }
     /**
      * GETS
@@ -82,14 +76,14 @@ public class CarroControlado extends Sprite {
     public float getLinearVelocity(){
         return this.body.getLinearVelocity().y;
     }
-    public Vector2 getPosition(){
+    private Vector2 getPosition(){
         return this.body.getPosition();
     }
     public State getCurrentState(){
         return currentState;
     }
     /**
-     * SETS
+     * Sets car step to zero when the force of body movement is making the body moving backwards
      * */
     public void setVelocityToZero(){
         if(getSpeedKMH() <= 0){
@@ -99,14 +93,8 @@ public class CarroControlado extends Sprite {
     }
 
     /**
-    * @return Vector2 car's velocity vector relative to the car
-    */
-    public Vector2 getLocalVelocity() {
-        return this.body.getLocalVector(this.body.getLinearVelocityFromLocalPoint(new Vector2(0, 0)));
-    }
-    /**
      * Calculates the car velocity
-     * @returns The car velocity em Kmh
+     * @return The car velocity em Kmh
      * */
     public float getSpeedKMH(){
         Vector2 velocity= this.body.getLinearVelocity();
@@ -116,7 +104,7 @@ public class CarroControlado extends Sprite {
      * Maintains Linear Velocity of the car only on the Y axis
      * Velocity in X axis is reset to zero
      * */
-    public void setLinearVelocity(){
+    private void setLinearVelocity(){
         this.getBodyCarroControlado().setLinearVelocity(0,this.getBodyCarroControlado().getLinearVelocity().y);
     }
     /**
@@ -137,7 +125,7 @@ public class CarroControlado extends Sprite {
     /**
      * Checks for Left, Right and finishing map limits
      * */
-    public void checkBoundaries(){
+    private void checkBoundaries(){
         boundariesLeft();
         boundariesRight();
         setVelocityToZero();
@@ -145,7 +133,7 @@ public class CarroControlado extends Sprite {
     /**
      * Checks if the car is beyond the left limits
      * */
-    public void boundariesLeft(){
+    private void boundariesLeft(){
         if(this.getPosition().x < MAP_LEFT_LIMITS){
             this.setLinearVelocity();
             this.flagBoundariesLeft = true;
@@ -156,7 +144,7 @@ public class CarroControlado extends Sprite {
     /**
      * Checks if the car is beyond the right limits
      * */
-    public void boundariesRight(){
+    private void boundariesRight(){
         if(this.getBodyCarroControlado().getPosition().x > MAP_RIGHT_LIMITS){
             this.setLinearVelocity();
             this.flagBoundariesRight = true;
@@ -166,10 +154,9 @@ public class CarroControlado extends Sprite {
     }
     /**
      * Function to separate from the input from desktop and the input from android
-     * @param delta recives a float delta time
      * */
-    public void handleInput(float delta) {
-        if (screen.getGame().getIsMobile() == true) {
+    private void handleInput() {
+        if (screen.getGame().getIsMobile()) {
             InputHandlerAndroid inputandroid = new InputHandlerAndroid();
             inputandroid.updateInputAndroid(this);
         } else {
@@ -179,10 +166,10 @@ public class CarroControlado extends Sprite {
     }
 
 
-    public void update(float delta){
+    public void update(){
         world.step(Gdx.graphics.getDeltaTime(),2,2);
         checkBoundaries();
-        this.handleInput(delta);
+        this.handleInput();
         if(getPosition().y > 80 ){
             this.currentState = State.FINISHING_LINE;
         }

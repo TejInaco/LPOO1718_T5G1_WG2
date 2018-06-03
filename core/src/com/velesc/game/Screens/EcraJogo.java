@@ -23,10 +23,8 @@ import com.velesc.game.Sprites.CarroControlado;
 public class EcraJogo implements Screen {
 
     private static float GAME_CAMERA_RACIO = 0.05f;
-    private final int CAR_INITIAL_POSITION_X = 50;
-    private final int CAR_INITIAL_POSITION_Y = 50;
 
-    VelocidadeEscaldante game;
+    private VelocidadeEscaldante game;
 
     //Cameras and game information visualization
     private OrthographicCamera gameCamera;
@@ -50,7 +48,7 @@ public class EcraJogo implements Screen {
     private OtherCars civil2;
 
     private boolean gameOver =false;
-    Assets assets = new Assets();
+    private Assets assets = new Assets();
 
 
     public EcraJogo(VelocidadeEscaldante game){
@@ -159,9 +157,13 @@ public class EcraJogo implements Screen {
         return player.currentState == CarroControlado.State.FINISHING_LINE;
     }
     /**
-     * //TODO check fuction collisions
+     * Checks collisions with other cars
+     * @param posPlayerX user car position x
+     * @param posPlayerY user car position y
+     * @param altura sprite height
+     * @param largura sprite width
      * */
-    public void checkCollisions(float posPlayerX, float posPlayerY, float largura, float altura){
+    private void checkCollisions(float posPlayerX, float posPlayerY, float largura, float altura){
         if(taxi.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ||
             civil1.hitByEnemy(posPlayerX, posPlayerY,  largura, altura)  ||
             civil2.hitByEnemy(posPlayerX, posPlayerY,  largura, altura) ){
@@ -191,7 +193,7 @@ public class EcraJogo implements Screen {
         taxi.update(delta);
         civil1.update(delta);
         civil2.update(delta);
-        player.update(delta);
+        player.update();
 
         game.batch.end();
         game.batch.setProjectionMatrix(gameInformation.stage.getCamera().combined);

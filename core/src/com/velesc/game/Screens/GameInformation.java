@@ -31,8 +31,8 @@ public class GameInformation implements Disposable{
     private final int INCREASE_POINTS_BY = 2;
     private int level = 0;
     private Table table;
-    //Scene 2d widgets
 
+    //Scene 2d widgets
     private Label pontosLabel;
     private Label pontos_NameLabel;
 
@@ -45,7 +45,9 @@ public class GameInformation implements Disposable{
     private Label levelLabel;
     private Label level_NameLabel;
 
-
+    /**
+     * Constructor
+     * */
     public GameInformation(SpriteBatch sb) {
         tempoContador = 0;
         pontos = 0;
