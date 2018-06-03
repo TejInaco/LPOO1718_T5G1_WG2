@@ -7,7 +7,7 @@ Documentação pode ser encontrada sobre a pasta __docs__
 Para correr a aplicação basta fazer o download do repositório.
 Navegar até
 
-~/LPOO1718_T5G1_WG2/desktop/build/libs
+~/out/artifacs/LPOO1718_T5G1_WG2
 
 E executar o comando:
 
