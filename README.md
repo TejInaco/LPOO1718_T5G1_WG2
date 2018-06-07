@@ -2,6 +2,12 @@
 
 Documentação pode ser encontrada sobre a pasta __docs__
 
+
+## DEVELOPMENT ENVIRONMENT
+
+Jogo desenvolvido no IntelliJ. Basta fazer o download do repositório e abrir o projecto. As configurações já estão pré-definidas.
+
+
 ## RUN THE APP ON DESKTOP (Linux)
 
 Para correr a aplicação basta fazer o download do repositório.
